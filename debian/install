@@ -1,7 +1,7 @@
 bin/gqrcode /opt/extras.ubuntu.com/gqrcode/bin
 src/*.py /opt/extras.ubuntu.com/gqrcode/share/gqrcode
-src/*.svg /opt/extras.ubuntu.com/gqrcode/share/gqrcode/qrcode
-src/*.html /opt/extras.ubuntu.com/gqrcode/share/gqrcode/qrcode
+src/*.svg /opt/extras.ubuntu.com/gqrcode/share/gqrcode
+src/*.html /opt/extras.ubuntu.com/gqrcode/share/gqrcode
 src/qrcode/*.py /opt/extras.ubuntu.com/gqrcode/share/gqrcode/qrcode
 src/qrcode/image/*.py /opt/extras.ubuntu.com/gqrcode/share/gqrcode/qrcode/image
 src/qrcode/tests/*.py /opt/extras.ubuntu.com/gqrcode/share/gqrcode/qrcode/tests

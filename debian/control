@@ -1,0 +1,15 @@
+Source: gqrcode
+Section: utils
+Priority: extra
+Maintainer: Lorenzo Carbonell Cerezo <lorenzo.carbonell.cerezo@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~), python-support, python (>=2.7)
+Standards-Version: 3.8.3
+Homepage: http://www.atareao.es
+
+Package: gqrcode
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends},
+	gir1.2-gtk-3.0,
+	gir1.2-gdkpixbuf-2.0,
+	zbar-tools
+Description: An application to work with QR codes

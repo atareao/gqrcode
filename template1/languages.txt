@@ -1,0 +1,9 @@
+eu
+it
+en
+ro
+tr
+gl
+es
+fr
+de

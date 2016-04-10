@@ -1,0 +1,174 @@
+# German translations for PACKAGE package.
+# Copyright (C) 2011 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Lorenzo <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gqrcode 0.3.0\n"
+"Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
+"POT-Creation-Date: 2016-04-10 21:52+0200\n"
+"PO-Revision-Date: 2011-03-27 10:06+0200\n"
+"Last-Translator: Lorenzo <EMAIL@ADDRESS>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:92
+msgid "Geolocation"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:112
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:145
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:174
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:203
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:232
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:297
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:312
+msgid "Encode"
+msgstr "Encode"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:128
+msgid "Text"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:130
+msgid "Set text to encode: "
+msgstr "Set Text zu codieren:"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:157
+msgid "Telephone number"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:159
+#, fuzzy
+msgid "Set number to encode:"
+msgstr "Set Text zu codieren:"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:186
+msgid "Email"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:188
+msgid "Set email:"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:215
+msgid "Url"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:217
+msgid "Set url:"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:244
+msgid "Wifi Login"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:246
+msgid "SSID/Network name:"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:261
+msgid "Password:"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:277
+msgid "Network type:"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:284
+msgid "WEP"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:285
+msgid "WPA/WPA2"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:286
+msgid "No encryption"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:321
+#, fuzzy
+msgid "Encoded text:"
+msgstr "Encode"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:342
+msgid "Decode"
+msgstr "Decode"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:351
+msgid "Decoded"
+msgstr "decodiert"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:378
+msgid "File"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:383
+msgid "load file"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:391
+msgid "Save as"
+msgstr "Speichern unter"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:401
+msgid "Help"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:416
+msgid "Homepage"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:424
+msgid "Get help online..."
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:432
+msgid "Translate this application..."
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:440
+msgid "Report a bug..."
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:452
+msgid "Follow me in Twitter"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:460
+msgid "Follow me in Google+"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:469
+msgid "Follow me in Facebook"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:476
+msgid "About"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:492
+msgid "An application to code and decode"
+msgstr "Ein Antrag auf kodieren und dekodieren"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:592
+msgid "Set file to load qrcode"
+msgstr "Set Datei qrcode Last"
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:598
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:639
+msgid "png files"
+msgstr ""
+
+#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:632
+msgid "Set file to save encode image"
+msgstr "Set Datei zu verschlüsseln Bild speichern"
+
+#~ msgid "Load qrcode image"
+#~ msgstr "Load qrcode Bild"

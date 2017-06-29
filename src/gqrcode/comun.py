@@ -38,19 +38,20 @@ APPNAME = 'GQRCode'
 
 # check if running from source
 if is_package():
-    ROOTDIR = '/opt/extras.ubuntu.com/gqrcode/share'
+    ROOTDIR = '/usr/share'
     LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
     APPDIR = os.path.join(ROOTDIR, APP)
-    CHANGELOG = os.path.join(APPDIR, 'changelog')
-    ICONDIR = os.path.join(ROOTDIR, 'icons')
+    CHANGELOG = os.path.join(APPDIR, 'gqrcode', 'changelog')
+    ICONDIR = os.path.join(ROOTDIR, 'icons', 'hicolor', 'scalable', 'apps')
     ICON = os.path.join(ICONDIR, 'gqrcode.svg')
 else:
     ROOTDIR = os.path.dirname(__file__)
-    LANGDIR = os.path.normpath(os.path.join(ROOTDIR, '../template1'))
+    LANGDIR = os.path.normpath(os.path.join(ROOTDIR, '../../template1'))
     APPDIR = ROOTDIR
-    DEBIANDIR = os.path.normpath(os.path.join(ROOTDIR, '../debian'))
+    DEBIANDIR = os.path.normpath(os.path.join(ROOTDIR, '../../debian'))
     CHANGELOG = os.path.join(DEBIANDIR, 'changelog')
-    ICON = os.path.normpath(os.path.join(ROOTDIR, '../data/icons/gqrcode.svg'))
+    ICON = os.path.normpath(os.path.join(ROOTDIR,
+                                         '../../data/icons/gqrcode.svg'))
 
 HTML_WAI = os.path.join(APPDIR, 'whereami.html')
 

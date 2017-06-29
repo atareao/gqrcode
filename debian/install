@@ -1,4 +1,4 @@
-bin/gqrcode /opt/extras.ubuntu.com/gqrcode/bin
+bin/gqrcode /us/rbin
 src/*.py /opt/extras.ubuntu.com/gqrcode/share/gqrcode
 src/*.svg /opt/extras.ubuntu.com/gqrcode/share/gqrcode
 src/*.html /opt/extras.ubuntu.com/gqrcode/share/gqrcode

@@ -1,9 +1,9 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 #
-# GQRCode
+# geolocation.py
 #
-# Copyright (C) 2011-2016 Lorenzo Carbonell Cerezo
+# Copyright (C) 2017 Lorenzo Carbonell Cerezo
 # lorenzo.carbonell.cerezo@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -18,23 +18,29 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
-#
-import os
-import sys
 
-USRDIR = '/usr'
-SHAREDIR = os.path.join(USRDIR, 'share', 'gqrcode')
-CURRENTDIR = os.path.abspath(os.path.dirname(__file__))
+import requests
+
+
+def get_external_ip():
+    response = requests.get('https://api.ipify.org')
+    if response.status_code == 200:
+        return response.text
+    return None
+
+
+def get_latitude_longitude(ip):
+    response = requests.get('https://freegeoip.net/json/{0}'.format(ip))
+    if response.status_code == 200:
+        position = response.json()
+        return position['latitude'], position['longitude']
+    return None
+
 
 if __name__ == '__main__':
-    print(CURRENTDIR)
-    if CURRENTDIR.startswith(USRDIR):
-        sys.path.append(SHAREDIR)
-    else:
-        sys.path.append(os.path.normpath(os.path.join(CURRENTDIR, '../src')))
-    from gqrcode.gqrcode import main
-
-    main()
-exit(0)
+    ip = get_external_ip()
+    if ip is not None:
+        ll = get_latitude_longitude(ip)
+        if ll is not None:
+            print(ll)
+    exit(0)

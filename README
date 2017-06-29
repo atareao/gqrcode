@@ -17,17 +17,22 @@ Requirements
 
 Required dependencies:
 
-	python3,
-	python3-gi,
-	python3-pil,
-	python3-requests,
-	gir1.2-gtk-3.0,
-	gir1.2-gdkpixbuf-2.0,
-	gir1.2-osmgpsmap-1.0,
-	zbar-tools
+    python3,
+    python3-gi,
+    python3-pil,
+    python3-requests,
+    gir1.2-gtk-3.0,
+    gir1.2-gdkpixbuf-2.0,
+    gir1.2-osmgpsmap-1.0,
+    zbar-tools
 
-========
-Download
-========
+=======
+Install
+=======
 
-Download the package:
+To install gqrcode in Ubuntu, Linux Mint and derivatives, run this commands in
+a terminal,
+
+    sudo add-apt-repository ppa:atareao/atareao
+    sudo apt update
+    sudo apt install gqrcode

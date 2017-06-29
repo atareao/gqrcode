@@ -1,4 +1,4 @@
-gqrcode (0.4.0-0extras17.04.0) zesty; urgency=medium
+gqrcode (0.4.0-0extras17.04.1) zesty; urgency=medium
 
   * Create QRs with background
   * Create animated QRs
@@ -6,7 +6,7 @@ gqrcode (0.4.0-0extras17.04.0) zesty; urgency=medium
   * Improved geolocation
   * Added work in background
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 29 Jun 2017 12:09:25 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 29 Jun 2017 12:35:00 +0200
 
 gqrcode (0.3.0-1ubuntu1) wily; urgency=medium
 

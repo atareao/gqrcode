@@ -1,11 +1,15 @@
-====================
+=======
 gqrcode
-====================
+=======
 
-gqrcode an application to work with qr codes
+gqrcode is a very simple application that can create QR codes. This codes
+can have background, and can be animated QR codes. There are posibilities to
+create codes for simple text, geolocations, telephone number, email, url,
+WiFi Login, SMS, email messages and vCards.
 
 For more information, please visit our website:
-http://www.atareao.es
+
+https://www.atareao.es
 
 ============
 Requirements

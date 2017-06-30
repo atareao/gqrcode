@@ -1,0 +1,3 @@
+[submodule "src/qreader"]
+	path = src/qreader
+	url = git@github.com:ewino/qreader.git

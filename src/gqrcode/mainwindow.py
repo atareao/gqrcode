@@ -44,6 +44,8 @@ import tempfile
 from . import comun
 from .myqr import create_qr
 from .geolocation import get_external_ip, get_latitude_longitude
+# from .mylibs.draw import pixbuf2image
+# import qreader
 from .async import async_function
 from .progreso import Progreso
 from .comun import _
@@ -565,6 +567,16 @@ END:VCARD
 ''' % (last_name, first_name, first_name, last_name, organization, job_title,
                 telephone_number, cell_phone, fax, email, street, city, state,
                 postcode, country, web, notes)
+        elif selected == 'vCal':
+            to_encode = '''
+BEGIN:VEVENT
+SUMMARY:{0}
+LOCATION:{1}
+DESCRIPTION:{2}
+DTSTART:{3}
+DTEND:{4}
+END:VEVENT
+'''
         else:
             return
         self.do_encode(to_encode)
@@ -601,6 +613,7 @@ END:VCARD
         self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.WATCH))
         p = Progreso(_('Creating QR Code'), self)
         do_encode_in_thread(to_encode, self.background, progreso=p)
+        p.run()
 
     def on_encoder_changed(self, widget):
         selected = get_selected_value_in_combo(self.control['encoder'])
@@ -751,7 +764,7 @@ END:VCARD
                 command = 'zbarimg %s' % (mtempfile)
                 salida = ejecuta(command)
                 try:
-                    utf8Data = salida.decode("ascii")
+                    utf8Data = salida.decode()
                     salida = utf8Data.split('QR-Code:')[1]
                 except UnicodeDecodeError as e:
                     print(e)
@@ -806,7 +819,8 @@ END:VCARD
                     filename += '.gif'
                 self.frames[0].save(filename,
                                     save_all=True,
-                                    append_images=self.frames[1:])
+                                    append_images=self.frames[1:],
+                                    loop=0)
             fcd.destroy()
 
     def close_application(self, widget):

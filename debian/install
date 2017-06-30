@@ -1,6 +1,6 @@
-bin/gqrcode /us/rbin
+bin/gqrcode /usr/bin
 src/gqrcode/*.py /usr/share/gqrcode/gqrcode
 src/gqrcode/mylibs/*.py /usr/share/gqrcode/gqrcode/mylibs
 data/gqrcode.desktop /usr/share/applications
-data/icons/gqrcode.svg /usr/share/icons
+data/icons/gqrcode.svg /usr/share/icons/hicolor/scalable/apps
 debian/changelog /usr/share/gqrcode

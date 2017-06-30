@@ -28,10 +28,9 @@ except Exception as e:
     exit(1)
 from gi.repository import Gtk
 from gi.repository import GObject
-import threading
 
 
-class Progreso(Gtk.Dialog, threading.Thread):
+class Progreso(Gtk.Dialog):
     __gsignals__ = {
         'i-want-stop': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
     }
@@ -76,9 +75,9 @@ class Progreso(Gtk.Dialog, threading.Thread):
                      ypadding=5,
                      xoptions=Gtk.AttachOptions.SHRINK)
         self.stop = False
-        self.show_all()
         self.max_value = max_value
         self.value = 0.0
+        self.show_all()
 
     def get_stop(self):
         return self.stop

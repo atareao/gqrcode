@@ -41,7 +41,7 @@ if is_package():
     ROOTDIR = '/usr/share'
     LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
     APPDIR = os.path.join(ROOTDIR, APP)
-    CHANGELOG = os.path.join(APPDIR, 'gqrcode', 'changelog')
+    CHANGELOG = os.path.join(ROOTDIR, 'gqrcode', 'changelog')
     ICONDIR = os.path.join(ROOTDIR, 'icons', 'hicolor', 'scalable', 'apps')
     ICON = os.path.join(ICONDIR, 'gqrcode.svg')
 else:

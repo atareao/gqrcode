@@ -3,10 +3,12 @@
 import gi
 try:
     gi.require_version('GdkPixbuf', '2.0')
+    gi.require_version('GLib', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import GdkPixbuf
+from gi.repository import GLib
 import os
 from .mylibs import theqrmodule
 from .mylibs.draw import image2pixbuf, pixbuf2image
@@ -73,8 +75,8 @@ def get_gif_rate(filename):
 def create_qr(words, version=1, level='H', picture=None, colorized=False,
               contrast=1.0, brightness=1.0, progreso=None):
     print('----', picture, '----')
-    supported_chars = r"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqr\
-stuvwxyz ··,.:;+-*/\~!@#$%^&`'=<>[]()?_{}|"
+    supported_chars = r"0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñop\
+qrstuvwxyz ··,.:;+-*/\~!@#$%^&`'=<>[]()?_{}|"
 
     # check every parameter
     if not isinstance(words, str) or\
@@ -131,11 +133,12 @@ stuvwxyz ··,.:;+-*/\~!@#$%^&`'=<>[]()?_{}|"
             print(rate)
             if rate is None:
                 if progreso is not None:
-                    progreso.set_max_value(1)
+                    GLib.idle_add(progreso.set_max_value, 1)
                 qr = combine_pilimage(ver, pilimage, picture, colorized,
                                       contrast, brightness)
-                progreso.increase()
-                progreso.close()
+                if progreso is not None:
+                    GLib.idle_add(progreso.increase)
+                    GLib.idle_add(progreso.close)
                 return image2pixbuf(qr), None
             else:
                 frames = get_frames(picture)
@@ -145,7 +148,7 @@ stuvwxyz ··,.:;+-*/\~!@#$%^&`'=<>[]()?_{}|"
                                                             rate)
                 image_frames = []
                 if progreso is not None:
-                    progreso.set_max_value(len(frames))
+                    GLib.idle_add(progreso.set_max_value, len(frames))
                 for index, frame in enumerate(frames):
                     print('Adding frame number: {0}'.format(index))
                     image_frame = combine_pilimage(ver, pilimage, frame,
@@ -154,22 +157,23 @@ stuvwxyz ··,.:;+-*/\~!@#$%^&`'=<>[]()?_{}|"
                     image_frames.append(image_frame)
                     simpleanim.add_frame(image2pixbuf(image_frame))
                     if progreso is not None:
-                        progreso.increase()
-                progreso.close()
+                        GLib.idle_add(progreso.increase)
+                if progreso is not None:
+                    GLib.idle_add(progreso.close)
                 return simpleanim, image_frames
         elif picture:
             if progreso is not None:
-                progreso.set_max_value(1)
+                GLib.idle_add(progreso.set_max_value, 1)
             qr = combine_pilimage(ver, pilimage, picture, colorized, contrast,
                                   brightness)
             if progreso is not None:
-                progreso.increase()
-                progreso.close()
+                GLib.idle_add(progreso.increase)
+                GLib.idle_add(progreso.close)
             return image2pixbuf(qr), None
         if progreso is not None:
-            progreso.set_max_value(1)
-            progreso.increase()
-            progreso.close()
+            GLib.idle_add(progreso.set_max_value, 1)
+            GLib.idle_add(progreso.increase)
+            GLib.idle_add(progreso.close)
         return image2pixbuf(pilimage), None
     except Exception as e:
         print(e)

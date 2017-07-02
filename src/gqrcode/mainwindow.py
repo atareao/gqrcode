@@ -37,6 +37,7 @@ from gi.repository import Gdk
 from gi.repository import Gio
 from gi.repository import GdkPixbuf
 from gi.repository import OsmGpsMap
+from enum import Enum
 import os
 import shlex
 import subprocess
@@ -56,8 +57,9 @@ def set_margins(widget, margin):
     widget.set_margin_right(margin)
     widget.set_margin_top(margin)
     widget.set_margin_bottom(margin)
-    widget.set_column_spacing(10)
-    widget.set_row_spacing(10)
+    if type(widget) == Gtk.Grid:
+        widget.set_column_spacing(10)
+        widget.set_row_spacing(10)
 
 
 def select_value_in_combo(combo, value):
@@ -87,6 +89,42 @@ def ejecuta(comando):
     return valor
 
 
+class QRType(Enum):
+    TEXT = 0
+    GEOLOCATION = 1
+    TELEPHONE_NUMBER = 2
+    EMAIL = 3
+    URL = 4
+    WIFI_LOGIN = 5
+    SMS = 6
+    EMAIL_MESSAGE = 7
+    VCARD = 8
+    VEVENT = 9
+
+    def get_type(decoded_string):
+        if decoded_string.lower().startswith('geo:'):
+            return QRType.GEOLOCATION
+        elif decoded_string.lower().startswith('tel:'):
+            return QRType.TELEPHONE_NUMBER
+        elif decoded_string.lower().startswith('mailto:'):
+            return QRType.EMAIL
+        elif decoded_string.lower().startswith('http://') or\
+                decoded_string.lower().startswith('https://'):
+            return QRType.URL
+        elif decoded_string.lower().startswith('wifi:'):
+            return QRType.WIFI_LOGIN
+        elif decoded_string.lower().startswith('smsto:'):
+            return QRType.SMS
+        elif decoded_string.lower().startswith('matmsg:'):
+            return QRType.EMAIL_MESSAGE
+        elif decoded_string.lower().startswith('begin:vcard'):
+            return QRType.VCARD
+        elif decoded_string.lower().startswith('begin:vevent'):
+            return QRType.VEVENT
+        else:
+            return QRType.TEXT
+
+
 class MainWindow(Gtk.ApplicationWindow):
     def __init__(self, app, afile=None):
         Gtk.ApplicationWindow.__init__(self, application=app)
@@ -94,6 +132,8 @@ class MainWindow(Gtk.ApplicationWindow):
         self.qrcode_file = None
         self.frames = None
         self.background = None
+        self.scale = 100
+        self.pbuf = None
 
         self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
         self.set_title(comun.APP)
@@ -104,19 +144,24 @@ class MainWindow(Gtk.ApplicationWindow):
         self.connect('destroy', self.close_application)
         hbox = Gtk.HBox(spacing=5)
         hbox.set_border_width(5)
-        self.add(hbox)
+        frame = Gtk.Frame()
+        set_margins(frame, 5)
+        self.add(frame)
 
-        self.frame = Gtk.Frame()
-        hbox.pack_start(self.frame, True, True, 0)
+        self.main_stack = Gtk.Stack.new()
+        self.main_stack.set_transition_type(
+            Gtk.StackTransitionType.UNDER_RIGHT)
+        frame.add(self.main_stack)
 
         self.stack = Gtk.Stack.new()
-        self.stack.set_transition_type(Gtk.StackTransitionType.UNDER_DOWN)
-        self.frame.add(self.stack)
+        self.stack.set_transition_type(
+            Gtk.StackTransitionType.UNDER_DOWN)
+        self.main_stack.add_named(self.stack, 'Data')
 
         grid1 = Gtk.Grid()
         set_margins(grid1, 10)
         grid1.set_margin_right(10)
-        self.stack.add_named(grid1, 'Text')
+        self.stack.add_named(grid1, QRType.TEXT.name)
         label1 = Gtk.Label(_('Set text to encode: '))
         label1.set_alignment(0, .5)
         grid1.attach(label1, 0, 0, 1, 1)
@@ -127,12 +172,12 @@ class MainWindow(Gtk.ApplicationWindow):
 
         grid2 = Gtk.Grid()
         set_margins(grid2, 10)
-        self.stack.add_named(grid2, 'Geolocation')
+        self.stack.add_named(grid2, QRType.GEOLOCATION.name)
         scrolledwindow0 = Gtk.ScrolledWindow()
         scrolledwindow0.set_policy(Gtk.PolicyType.AUTOMATIC,
                                    Gtk.PolicyType.AUTOMATIC)
         scrolledwindow0.set_shadow_type(Gtk.ShadowType.ETCHED_OUT)
-        scrolledwindow0.set_size_request(500, 400)
+        scrolledwindow0.set_size_request(550, 550)
         grid2.attach(scrolledwindow0, 0, 0, 1, 1,)
 
         self.viewer = OsmGpsMap.Map()
@@ -152,11 +197,11 @@ class MainWindow(Gtk.ApplicationWindow):
         self.viewer.set_keyboard_shortcut(OsmGpsMap.MapKey_t.RIGHT,
                                           Gdk.keyval_from_name("Right"))
         scrolledwindow0.add(self.viewer)
-        scrolledwindow0.set_size_request(500, 400)
+        scrolledwindow0.set_size_request(550, 550)
 
         grid3 = Gtk.Grid()
         set_margins(grid3, 10)
-        self.stack.add_named(grid3, 'Telephone number')
+        self.stack.add_named(grid3, QRType.TELEPHONE_NUMBER.name)
         label1 = Gtk.Label(_('Set number to encode:'))
         label1.set_alignment(0, .5)
         grid3.attach(label1, 0, 0, 1, 1)
@@ -168,7 +213,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         grid4 = Gtk.Grid()
         set_margins(grid4, 10)
-        self.stack.add_named(grid4, 'Email')
+        self.stack.add_named(grid4, QRType.EMAIL.name)
         label1 = Gtk.Label(_('Set email:'))
         label1.set_alignment(0, .5)
         grid4.attach(label1, 0, 0, 1, 1)
@@ -180,7 +225,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         grid5 = Gtk.Grid()
         set_margins(grid5, 10)
-        self.stack.add_named(grid5, 'Url')
+        self.stack.add_named(grid5, QRType.URL.name)
         label1 = Gtk.Label(_('Set url:'))
         label1.set_alignment(0, .5)
         grid5.attach(label1, 0, 0, 1, 1)
@@ -192,7 +237,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         grid6 = Gtk.Grid()
         set_margins(grid6, 10)
-        self.stack.add_named(grid6, 'Wifi Login')
+        self.stack.add_named(grid6, QRType.WIFI_LOGIN.name)
         label1 = Gtk.Label(_('SSID/Network name:'))
         label1.set_alignment(0, .5)
         grid6.attach(label1, 0, 0, 1, 1)
@@ -229,7 +274,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         grid7 = Gtk.Grid()
         set_margins(grid7, 10)
-        self.stack.add_named(grid7, 'SMS')
+        self.stack.add_named(grid7, QRType.SMS.name)
 
         label1 = Gtk.Label(_('Telephone Number:'))
         label1.set_alignment(0, .5)
@@ -248,7 +293,7 @@ class MainWindow(Gtk.ApplicationWindow):
         scrolledwindow_sms.set_hexpand(True)
         scrolledwindow_sms.set_vexpand(True)
         scrolledwindow_sms.set_shadow_type(type=Gtk.ShadowType.ETCHED_IN)
-        scrolledwindow_sms.set_size_request(400, 300)
+        scrolledwindow_sms.set_size_request(550, 550)
         grid7.attach(
             scrolledwindow_sms, 0, 2, 2, 2,)
         self.entry172 = Gtk.TextView()
@@ -256,7 +301,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         grid8 = Gtk.Grid()
         set_margins(grid8, 10)
-        self.stack.add_named(grid8, 'Email message')
+        self.stack.add_named(grid8, QRType.EMAIL_MESSAGE.name)
 
         label1 = Gtk.Label(_('Email:'))
         label1.set_alignment(0, .5)
@@ -285,14 +330,14 @@ class MainWindow(Gtk.ApplicationWindow):
         scrolledwindow_email.set_hexpand(True)
         scrolledwindow_email.set_vexpand(True)
         scrolledwindow_email.set_shadow_type(type=Gtk.ShadowType.ETCHED_IN)
-        scrolledwindow_email.set_size_request(400, 300)
+        scrolledwindow_email.set_size_request(550, 300)
         grid8.attach(scrolledwindow_email, 0, 3, 2, 2)
         self.entry183 = Gtk.TextView()
         scrolledwindow_email.add(self.entry183)
 
         grid9 = Gtk.Grid()
         set_margins(grid9, 10)
-        self.stack.add_named(grid9, 'vCard')
+        self.stack.add_named(grid9, QRType.VCARD.name)
 
         labels_card = {'01': _('Fist name'),
                        '02': _('Last name'),
@@ -320,73 +365,53 @@ class MainWindow(Gtk.ApplicationWindow):
             self.entries_vcard[key].set_width_chars(40)
             grid9.attach(self.entries_vcard[key], 1, i, 1, 1)
 
-        self.notebook2 = Gtk.Notebook()
-        hbox.pack_start(self.notebook2, False, False, 0)
-        #
-        table21 = Gtk.Table(rows=2, columns=2, homogeneous=False)
-        table21.set_border_width(5)
-        table21.set_col_spacings(5)
-        table21.set_row_spacings(5)
-        self.notebook2.append_page(table21, tab_label=Gtk.Label(_('Encode')))
-        #
-        self.image21 = Gtk.Image()
-        table21.attach(
-            self.image21, 0, 2, 0, 1,
-            xoptions=Gtk.AttachOptions.FILL,
-            yoptions=Gtk.AttachOptions.FILL)
-        self.image21.set_size_request(400, 400)
-        #
-        label21 = Gtk.Label(_('Encoded text:'))
-        label21.set_alignment(0, .5)
-        table21.attach(
-            label21, 0, 1, 1, 2,
-            xoptions=Gtk.AttachOptions.SHRINK,
-            yoptions=Gtk.AttachOptions.SHRINK)
-        #
-        self.entry21 = Gtk.Entry()
-        self.entry21.set_alignment(0)
-        self.entry21.set_editable(False)
-        self.entry21.set_width_chars(40)
-        table21.attach(
-            self.entry21, 1, 2, 1, 2,
-            xoptions=Gtk.AttachOptions.FILL,
-            yoptions=Gtk.AttachOptions.SHRINK)
-        #
-        #
-        table22 = Gtk.Table(rows=2, columns=2, homogeneous=False)
-        table22.set_border_width(5)
-        table22.set_col_spacings(5)
-        table22.set_row_spacings(5)
-        self.notebook2.append_page(table22, tab_label=Gtk.Label(_('Decode')))
-        #
-        self.image22 = Gtk.Image()
-        table22.attach(
-            self.image22, 0, 2, 0, 1,
-            xoptions=Gtk.AttachOptions.FILL,
-            yoptions=Gtk.AttachOptions.FILL)
-        self.image22.set_size_request(400, 400)
-        #
-        label22 = Gtk.Label(_('Decoded') + ': ')
-        label22.set_alignment(0, 0.5)
-        table22.attach(
-            label22, 0, 1, 1, 2,
-            xoptions=Gtk.AttachOptions.SHRINK,
-            yoptions=Gtk.AttachOptions.SHRINK)
-        #
-        self.entry22 = Gtk.Entry()
-        self.entry22.set_alignment(0)
-        self.entry22.set_width_chars(50)
-        table22.attach(
-            self.entry22, 1, 2, 1, 2,
-            xoptions=Gtk.AttachOptions.FILL,
-            yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        self.scrolled_code = Gtk.ScrolledWindow.new()
+        self.scrolled_code.set_size_request(550, 550)
+        self.main_stack.add_named(self.scrolled_code, 'Code')
+        self.image = Gtk.Image()
+        self.connect('key-release-event', self.on_key_release_event)
+        self.scrolled_code.add_with_viewport(self.image)
+
         self.init_menu(hbox)
         self.init_headerbar()
-        #
+
         self.show_all()
-        #
         self.do_center()
+
+    def on_key_release_event(self, widget, event):
+        print((event.keyval))
+        if event.keyval == 65451 or event.keyval == 43:
+            self.scale = self.scale*1.1
+        elif event.keyval == 65453 or event.keyval == 45:
+            self.scale = self.scale*.9
+        elif event.keyval == 65456 or event.keyval == 48:
+            self.scale = 100
+        self.draw_code()
+
+    def draw_code(self, first=False):
+        if first is True:
+            rectangle = self.scrolled_code.get_allocation()
+            print(rectangle.width, rectangle.height)
+            if rectangle.width == 1 or rectangle.height == 1:
+                width = 400
+                height = 400
+            else:
+                width = rectangle.width
+                height = rectangle.height
+            scale_w = width / self.pbuf.get_width() * 100
+            scale_h = height / self.pbuf.get_height() * 100
+            if scale_w > scale_h:
+                self.scale = scale_h
+            else:
+                self.scale = scale_w
+            print(scale_w, scale_h, self.scale)
+
+        if self.pbuf is not None:
+            w = int(self.pbuf.get_width() * self.scale / 100)
+            h = int(self.pbuf.get_height() * self.scale / 100)
+            pixbuf = self.pbuf.scale_simple(w, h,
+                                            GdkPixbuf.InterpType.BILINEAR)
+            self.image.set_from_pixbuf(pixbuf)
 
     def init_headerbar(self):
         self.control = {}
@@ -425,16 +450,16 @@ class MainWindow(Gtk.ApplicationWindow):
             name='folder-open-symbolic'), Gtk.IconSize.BUTTON))
         hb.pack_start(self.control['file'])
 
-        model = Gtk.ListStore(str, str)
-        model.append([_('Text'), 'Text'])
-        model.append([_('Geolocation'), 'Geolocation'])
-        model.append([_('Telephone number'), 'Telephone number'])
-        model.append([_('Email'), 'Email'])
-        model.append([_('Url'), 'Url'])
-        model.append([_('Wifi Login'), 'Wifi Login'])
-        model.append([_('SMS'), 'SMS'])
-        model.append([_('Email message'), 'Email message'])
-        model.append([_('vCard'), 'vCard'])
+        model = Gtk.ListStore(str, object)
+        model.append([_('Text'), QRType.TEXT])
+        model.append([_('Geolocation'), QRType.GEOLOCATION])
+        model.append([_('Telephone number'), QRType.TELEPHONE_NUMBER])
+        model.append([_('Email'), QRType.EMAIL])
+        model.append([_('Url'), QRType.URL])
+        model.append([_('Wifi Login'), QRType.WIFI_LOGIN])
+        model.append([_('SMS'), QRType.SMS])
+        model.append([_('Email message'), QRType.EMAIL_MESSAGE])
+        model.append([_('vCard'), QRType.VCARD])
 
         self.control['encoder'] = Gtk.ComboBox.new()
         self.control['encoder'].set_model(model)
@@ -448,7 +473,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.control['run'] = Gtk.Button()
         self.control['run'].set_tooltip_text(_('Encode'))
         self.control['run'].add(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='system-run-symbolic'), Gtk.IconSize.BUTTON))
+            name='go-next-symbolic'), Gtk.IconSize.BUTTON))
         self.control['run'].connect('clicked', self.on_run)
         hb.pack_start(self.control['run'])
 
@@ -488,68 +513,75 @@ class MainWindow(Gtk.ApplicationWindow):
             name='open-menu-symbolic'), Gtk.IconSize.BUTTON))
         hb.pack_end(self.control['help'])
 
+        self.control['back'] = Gtk.Button()
+        self.control['back'].add(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
+            name='go-previous-symbolic'), Gtk.IconSize.BUTTON))
+        self.control['back'].set_visible(False)
+        hb.pack_end(self.control['back'])
+
     def on_run(self, widget):
-        selected = get_selected_value_in_combo(self.control['encoder'])
-        if selected == 'Geolocation':
-            to_encode = 'geo:%1.4f,%1.4f' % (self.viewer.props.latitude,
-                                             self.viewer.props.longitude)
-        elif selected == 'Text':
-            to_encode = self.entry12.get_text()
-        elif selected == 'Telephone number':
-            to_encode = 'TEL:'+self.entry13.get_text()
-        elif selected == 'Email':
-            to_encode = 'MAILTO:'+self.entry14.get_text()
-        elif selected == 'Url':
-            to_encode = self.entry15.get_text()
-            if not to_encode.startswith('http://') and\
-                    not to_encode.startswith('https://'):
-                if to_encode.startswith('//'):
-                    to_encode = 'http:' + to_encode
-                elif to_encode.startswith('/'):
-                    to_encode = 'http:/' + to_encode
-                else:
-                    to_encode = 'http://' + to_encode
-        elif selected == 'Wifi Login':
-            ssid = self.entry161.get_text()
-            password = self.entry162.get_text()
-            network_type = get_selected_value_in_combo(self.combobox163)
-            print(ssid, password, network_type)
-            to_encode = 'WIFI:T:%s;S:%s;P:%s;;' % (
-                network_type, ssid, password)
-        elif selected == 'SMS':
-            number = self.entry171.get_text()
-            textbuffer = self.entry172.get_buffer()
-            start_iter, end_iter = textbuffer.get_bounds()
-            message = textbuffer.get_text(start_iter, end_iter, True)
-            to_encode = 'SMSTO:%s:%s' % (number, message)
-        elif selected == 'Email message':
-            email = self.entry181.get_text()
-            subject = self.entry182.get_text()
-            textbuffer = self.entry183.get_buffer()
-            start_iter, end_iter = textbuffer.get_bounds()
-            message = textbuffer.get_text(start_iter, end_iter, True)
-            to_encode = 'MATMSG:TO:%s;SUB:%s;BODY:%s;;' % (
-                email, subject, message)
-        elif selected == 'vCard':
-            first_name = self.entries_vcard['01'].get_text()
-            last_name = self.entries_vcard['02'].get_text()
-            job_title = self.entries_vcard['03'].get_text()
-            telephone_number = self.entries_vcard['04'].get_text()
-            cell_phone = self.entries_vcard['05'].get_text()
-            fax = self.entries_vcard['06'].get_text()
-            email = self.entries_vcard['07'].get_text()
-            web = self.entries_vcard['08'].get_text()
-            organization = self.entries_vcard['09'].get_text()
-            street = self.entries_vcard['10'].get_text()
-            city = self.entries_vcard['11'].get_text()
-            state = self.entries_vcard['12'].get_text()
-            postcode = self.entries_vcard['13'].get_text()
-            country = self.entries_vcard['14'].get_text()
-            notes = self.entries_vcard['15'].get_text()
-            if not web.startswith('http') and\
-                    not web.startswith('https'):
-                web = 'http:\\' + web
-            to_encode = '''
+        if self.main_stack.get_visible_child_name() == 'Data':
+            selected = get_selected_value_in_combo(self.control['encoder'])
+            if selected == QRType.GEOLOCATION:
+                to_encode = 'geo:%1.4f,%1.4f' % (self.viewer.props.latitude,
+                                                 self.viewer.props.longitude)
+            elif selected == QRType.TEXT:
+                to_encode = self.entry12.get_text()
+            elif selected == QRType.TELEPHONE_NUMBER:
+                to_encode = 'TEL:'+self.entry13.get_text()
+            elif selected == QRType.EMAIL:
+                to_encode = 'MAILTO:'+self.entry14.get_text()
+            elif selected == QRType.URL:
+                to_encode = self.entry15.get_text()
+                if not to_encode.startswith('http://') and\
+                        not to_encode.startswith('https://'):
+                    if to_encode.startswith('//'):
+                        to_encode = 'http:' + to_encode
+                    elif to_encode.startswith('/'):
+                        to_encode = 'http:/' + to_encode
+                    else:
+                        to_encode = 'http://' + to_encode
+            elif selected == QRType.WIFI_LOGIN:
+                ssid = self.entry161.get_text()
+                password = self.entry162.get_text()
+                network_type = get_selected_value_in_combo(self.combobox163)
+                print(ssid, password, network_type)
+                to_encode = 'WIFI:T:%s;S:%s;P:%s;;' % (
+                    network_type, ssid, password)
+            elif selected == QRType.SMS:
+                number = self.entry171.get_text()
+                textbuffer = self.entry172.get_buffer()
+                start_iter, end_iter = textbuffer.get_bounds()
+                message = textbuffer.get_text(start_iter, end_iter, True)
+                to_encode = 'SMSTO:%s:%s' % (number, message)
+            elif selected == QRType.EMAIL_MESSAGE:
+                email = self.entry181.get_text()
+                subject = self.entry182.get_text()
+                textbuffer = self.entry183.get_buffer()
+                start_iter, end_iter = textbuffer.get_bounds()
+                message = textbuffer.get_text(start_iter, end_iter, True)
+                to_encode = 'MATMSG:TO:%s;SUB:%s;BODY:%s;;' % (
+                    email, subject, message)
+            elif selected == QRType.VCARD:
+                first_name = self.entries_vcard['01'].get_text()
+                last_name = self.entries_vcard['02'].get_text()
+                job_title = self.entries_vcard['03'].get_text()
+                telephone_number = self.entries_vcard['04'].get_text()
+                cell_phone = self.entries_vcard['05'].get_text()
+                fax = self.entries_vcard['06'].get_text()
+                email = self.entries_vcard['07'].get_text()
+                web = self.entries_vcard['08'].get_text()
+                organization = self.entries_vcard['09'].get_text()
+                street = self.entries_vcard['10'].get_text()
+                city = self.entries_vcard['11'].get_text()
+                state = self.entries_vcard['12'].get_text()
+                postcode = self.entries_vcard['13'].get_text()
+                country = self.entries_vcard['14'].get_text()
+                notes = self.entries_vcard['15'].get_text()
+                if not web.startswith('http') and\
+                        not web.startswith('https'):
+                    web = 'http:\\' + web
+                to_encode = '''
 BEGIN:VCARD
 N;CHARSET=utf-8:%s;%s;;;
 FN;CHARSET=utf-8:%s %s
@@ -565,10 +597,10 @@ NOTE;CHARSET=utf-8:%s
 VERSION:2.1
 END:VCARD
 ''' % (last_name, first_name, first_name, last_name, organization, job_title,
-                telephone_number, cell_phone, fax, email, street, city, state,
-                postcode, country, web, notes)
-        elif selected == 'vCal':
-            to_encode = '''
+       telephone_number, cell_phone, fax, email, street, city, state,
+       postcode, country, web, notes)
+            elif selected == 'vCal':
+                to_encode = '''
 BEGIN:VEVENT
 SUMMARY:{0}
 LOCATION:{1}
@@ -577,31 +609,46 @@ DTSTART:{3}
 DTEND:{4}
 END:VEVENT
 '''
-        else:
-            return
-        self.do_encode(to_encode)
+            else:
+                return
+            self.do_encode(to_encode)
+        elif self.main_stack.get_visible_child_name() == 'Code':
+            self.do_decode()
 
     def do_encode(self, to_encode):
-        self.entry21.set_text(to_encode)
+        # self.entry21.set_text(to_encode)
 
         def on_encode_done(result, error):
-            print('---', 1, '---')
-            if isinstance(result, GdkPixbuf.Pixbuf):
-                print('---', 2, '---')
-                self.image21.set_from_pixbuf(result)
-            elif isinstance(result, GdkPixbuf.PixbufSimpleAnim):
-                print('---', 3, '---')
-                self.image21.set_from_animation(result)
-            else:
-                print(type(result))
-            '''
-            pixbuf = result['pixbuf']
-            mtempfile = result['tempfile']
-            self.image21.set_from_pixbuf(pixbuf)
-            if os.path.exists(mtempfile):
-                os.remove(mtempfile)
-            '''
-            self.notebook2.set_current_page(0)
+            if self.main_stack.get_visible_child_name() == 'Data':
+                print(self.main_stack.get_visible_child_name())
+                print('---', 1, '---')
+                if isinstance(result, GdkPixbuf.Pixbuf):
+                    print('---', 2, '---')
+                    self.pbuf = result
+                    self.draw_code(first=True)
+                elif isinstance(result, GdkPixbuf.PixbufSimpleAnim):
+                    print('---', 3, '---')
+                    self.pbuf = result
+                    self.draw_code(first=True)
+                else:
+                    print(type(result))
+
+                self.main_stack.set_visible_child_name('Code')
+                self.main_stack.set_transition_type(
+                    Gtk.StackTransitionType.UNDER_LEFT)
+                self.control['run'].get_child().set_from_gicon(
+                        Gio.ThemedIcon(name='go-previous-symbolic'),
+                        Gtk.IconSize.BUTTON)
+
+            elif self.main_stack.get_visible_child_name() == 'Code':
+                self.main_stack.set_visible_child_name('Data')
+                self.main_stack.set_transition_type(
+                    Gtk.StackTransitionType.UNDER_RIGHT)
+                self.control['run'].get_child().set_from_gicon(
+                        Gio.ThemedIcon(name='go-next-symbolic'),
+                        Gtk.IconSize.BUTTON)
+
+            self.main_stack.get_visible_child().show_all()
             self.get_window().set_cursor(None)
 
         @async_function(on_done=on_encode_done)
@@ -617,9 +664,7 @@ END:VEVENT
 
     def on_encoder_changed(self, widget):
         selected = get_selected_value_in_combo(self.control['encoder'])
-        self.frame.set_label(selected)
-        print(selected)
-        self.stack.set_visible_child_name(selected)
+        self.stack.set_visible_child_name(selected.name)
         self.stack.get_visible_child().show_all()
 
     def do_center(self):
@@ -750,13 +795,29 @@ END:VEVENT
     def do_decode(self):
 
         def on_decode_done(result, error):
+            print(1, '----', result, QRType.get_type(result).name)
             if result is not None:
-                self.entry22.set_text(result)
-            self.notebook2.set_current_page(1)
+                if QRType.get_type(result) == QRType.TEXT:
+                    self.entry12.set_text(result)
+                elif QRType.get_type(result) == QRType.GEOLOCATION:
+                    lat, lon = result[4:].split(',')
+                    self.viewer.set_center_and_zoom(float(lat), float(lon), 14)
+                    print(lat, lon)
+                    pass
+                select_value_in_combo(self.control['encoder'],
+                                      QRType.get_type(result))
+
+                self.main_stack.set_visible_child_name('Data')
+                self.main_stack.set_transition_type(
+                    Gtk.StackTransitionType.UNDER_RIGHT)
+                self.control['run'].get_child().set_from_gicon(
+                        Gio.ThemedIcon(name='go-next-symbolic'),
+                        Gtk.IconSize.BUTTON)
+                self.main_stack.get_visible_child().show_all()
 
         @async_function(on_done=on_decode_done)
         def do_decode_in_thread(pixbuf):
-            if pixbuf is not None and self.qrcode_file is not None:
+            if pixbuf is not None:
                 mtempfile = tempfile.NamedTemporaryFile(mode='w+b',
                                                         prefix='gqrcode',
                                                         delete=True).name
@@ -773,8 +834,7 @@ END:VEVENT
                 if salida.endswith('\n'):
                     salida = salida[:-1]
             return salida
-        pixbuf = self.image22.get_pixbuf()
-        do_decode_in_thread(pixbuf)
+        do_decode_in_thread(self.pbuf)
 
     def save_encoded(self):
         animation = self.image21.get_animation()

@@ -108,23 +108,23 @@ class MainApplication(Gtk.Application):
         self.add_action(create_action(
             'goto_code',
             callback=lambda x, y: webbrowser.open(
-                'https://github.com/atareao/upodcatcher')))
+                'https://github.com/atareao/gqrcode')))
         self.add_action(create_action(
             'goto_bug',
             callback=lambda x, y: webbrowser.open(
-                'https://github.com/atareao/upodcatcher/issues')))
+                'https://github.com/atareao/gqrcode/issues')))
         self.add_action(create_action(
             'goto_sugestion',
             callback=lambda x, y: webbrowser.open(
-                'https://blueprints.launchpad.net/2gif')))
+                'https://blueprints.launchpad.net/gqrcode')))
         self.add_action(create_action(
             'goto_translation',
             callback=lambda x, y: webbrowser.open(
-                'https://translations.launchpad.net/2gif')))
+                'https://translations.launchpad.net/gqrcode')))
         self.add_action(create_action(
             'goto_questions',
             callback=lambda x, y: webbrowser.open(
-                'https://answers.launchpad.net/2gif')))
+                'https://answers.launchpad.net/gqrcode')))
         self.add_action(create_action(
             'goto_twitter',
             callback=lambda x, y: webbrowser.open(

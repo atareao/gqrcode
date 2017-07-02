@@ -1,9 +1,9 @@
-gqrcode (0.4.1-0extras17.04.2) zesty; urgency=medium
+gqrcode (0.4.1-0extras17.04.3) zesty; urgency=medium
 
   * Loop in gifs
   * Ñ-ñ
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Fri, 30 Jun 2017 19:16:05 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Fri, 30 Jun 2017 19:26:30 +0200
 
 gqrcode (0.4.0-0extras17.04.6) zesty; urgency=medium
 

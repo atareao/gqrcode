@@ -49,7 +49,39 @@ from .geolocation import get_external_ip, get_latitude_longitude
 # import qreader
 from .async import async_function
 from .progreso import Progreso
+from .parse import parse
 from .comun import _
+
+ST_GEO = 'GEO:{0},{1}'
+ST_TEL = 'TEL:{0}'
+ST_MAIL = 'MAILTO:{0}'
+ST_WIFI = 'WIFI:T:{0};S:{1};P:{2};;'
+ST_SMS = 'SMSTO:{0}:{1}'
+ST_EMAIL_MSG = 'MATMSG:TO:{0};SUB:{1};BODY:{2};;'
+ST_VCARD = '''BEGIN:VCARD
+N;CHARSET=utf-8:{0};{1};;;
+FN;CHARSET=utf-8:{2} {3}
+ORG;CHARSET=utf-8:{4}
+TITLE;CHARSET=utf-8:{5}
+TEL;WORK:{6}
+TEL;CELL:{7}
+TEL;WORK;FAX:{8}
+EMAIL;INTERNET;WORK;CHARSET=utf-8:{9}
+ADR;WORK;CHARSET=utf-8:;;{10};{11};{12};{13};{14}
+URL;WORK;CHARSET=utf-8:{15}
+NOTE;CHARSET=utf-8:{16}
+VERSION:2.1
+END:VCARD
+'''
+ST_VEVENT = '''
+BEGIN:VEVENT
+SUMMARY:{0}
+LOCATION:{1}
+DESCRIPTION:{2}
+DTSTART:{3}
+DTEND:{4}
+END:VEVENT
+'''
 
 
 def set_margins(widget, margin):
@@ -513,24 +545,19 @@ class MainWindow(Gtk.ApplicationWindow):
             name='open-menu-symbolic'), Gtk.IconSize.BUTTON))
         hb.pack_end(self.control['help'])
 
-        self.control['back'] = Gtk.Button()
-        self.control['back'].add(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-previous-symbolic'), Gtk.IconSize.BUTTON))
-        self.control['back'].set_visible(False)
-        hb.pack_end(self.control['back'])
-
     def on_run(self, widget):
         if self.main_stack.get_visible_child_name() == 'Data':
             selected = get_selected_value_in_combo(self.control['encoder'])
             if selected == QRType.GEOLOCATION:
-                to_encode = 'geo:%1.4f,%1.4f' % (self.viewer.props.latitude,
-                                                 self.viewer.props.longitude)
+                to_encode = ST_GEO.format(
+                    '{:10.4f}'.format(self.viewer.props.latitude),
+                    '{:10.4f}'.format(self.viewer.props.longitude))
             elif selected == QRType.TEXT:
                 to_encode = self.entry12.get_text()
             elif selected == QRType.TELEPHONE_NUMBER:
-                to_encode = 'TEL:'+self.entry13.get_text()
+                to_encode = ST_TEL.format(self.entry13.get_text())
             elif selected == QRType.EMAIL:
-                to_encode = 'MAILTO:'+self.entry14.get_text()
+                to_encode = ST_MAIL.format(self.entry14.get_text())
             elif selected == QRType.URL:
                 to_encode = self.entry15.get_text()
                 if not to_encode.startswith('http://') and\
@@ -545,23 +572,21 @@ class MainWindow(Gtk.ApplicationWindow):
                 ssid = self.entry161.get_text()
                 password = self.entry162.get_text()
                 network_type = get_selected_value_in_combo(self.combobox163)
-                print(ssid, password, network_type)
-                to_encode = 'WIFI:T:%s;S:%s;P:%s;;' % (
+                to_encode = ST_WIFI.format(
                     network_type, ssid, password)
             elif selected == QRType.SMS:
                 number = self.entry171.get_text()
                 textbuffer = self.entry172.get_buffer()
                 start_iter, end_iter = textbuffer.get_bounds()
                 message = textbuffer.get_text(start_iter, end_iter, True)
-                to_encode = 'SMSTO:%s:%s' % (number, message)
+                to_encode = ST_SMS.format(number, message)
             elif selected == QRType.EMAIL_MESSAGE:
                 email = self.entry181.get_text()
                 subject = self.entry182.get_text()
                 textbuffer = self.entry183.get_buffer()
                 start_iter, end_iter = textbuffer.get_bounds()
                 message = textbuffer.get_text(start_iter, end_iter, True)
-                to_encode = 'MATMSG:TO:%s;SUB:%s;BODY:%s;;' % (
-                    email, subject, message)
+                to_encode = ST_EMAIL_MSG.format(email, subject, message)
             elif selected == QRType.VCARD:
                 first_name = self.entries_vcard['01'].get_text()
                 last_name = self.entries_vcard['02'].get_text()
@@ -581,24 +606,11 @@ class MainWindow(Gtk.ApplicationWindow):
                 if not web.startswith('http') and\
                         not web.startswith('https'):
                     web = 'http:\\' + web
-                to_encode = '''
-BEGIN:VCARD
-N;CHARSET=utf-8:%s;%s;;;
-FN;CHARSET=utf-8:%s %s
-ORG;CHARSET=utf-8:%s
-TITLE;CHARSET=utf-8:%s
-TEL;WORK:%s
-TEL;CELL:%s
-TEL;WORK;FAX:%s
-EMAIL;INTERNET;WORK;CHARSET=utf-8:%s
-ADR;WORK;CHARSET=utf-8:;;%s;%s;%s;%s;%s
-URL;WORK;CHARSET=utf-8:%s
-NOTE;CHARSET=utf-8:%s
-VERSION:2.1
-END:VCARD
-''' % (last_name, first_name, first_name, last_name, organization, job_title,
-       telephone_number, cell_phone, fax, email, street, city, state,
-       postcode, country, web, notes)
+                to_encode = ST_VCARD.format(last_name, first_name, first_name,
+                                            last_name, organization, job_title,
+                                            telephone_number, cell_phone, fax,
+                                            email, street, city, state,
+                                            postcode, country, web, notes)
             elif selected == 'vCal':
                 to_encode = '''
 BEGIN:VEVENT
@@ -792,18 +804,73 @@ END:VEVENT
                 self.background = filename
         fcd.destroy()
 
+    def clean(self):
+        self.entry12.set_text('')
+        self.entry13.set_text('')
+        self.entry14.set_text('')
+        self.entry15.set_text('')
+        self.entry161.set_text('')
+        self.entry162.set_text('')
+        self.entry171.set_text('')
+        self.entry172.get_buffer().set_text('')
+        select_value_in_combo(self.combobox163, 'WEP')
+        self.entry181.set_text('')
+        self.entry182.set_text('')
+        self.entry183.get_buffer().set_text('')
+
     def do_decode(self):
 
         def on_decode_done(result, error):
             print(1, '----', result, QRType.get_type(result).name)
+            self.clean()
             if result is not None:
                 if QRType.get_type(result) == QRType.TEXT:
                     self.entry12.set_text(result)
                 elif QRType.get_type(result) == QRType.GEOLOCATION:
-                    lat, lon = result[4:].split(',')
-                    self.viewer.set_center_and_zoom(float(lat), float(lon), 14)
-                    print(lat, lon)
-                    pass
+                    r = parse(ST_GEO, result)
+                    self.viewer.set_center_and_zoom(float(r[0]),
+                                                    float(r[1]),
+                                                    14)
+                elif QRType.get_type(result) == QRType.TELEPHONE_NUMBER:
+                    r = parse(ST_TEL, result)
+                    self.entry13.set_text(r[0])
+                elif QRType.get_type(result) == QRType.EMAIL:
+                    r = parse(ST_MAIL, result)
+                    self.entry14.set_text(r[0])
+                elif QRType.get_type(result) == QRType.URL:
+                    self.entry15.set_text(result)
+                elif QRType.get_type(result) == QRType.WIFI_LOGIN:
+                    r = parse(ST_WIFI, result)
+                    self.entry161.set_text(r[1])
+                    self.entry162.set_text(r[2])
+                    select_value_in_combo(self.combobox163, r[0])
+                elif QRType.get_type(result) == QRType.SMS:
+                    r.parse(ST_SMS, result)
+                    self.entry171.set_text(r[0])
+                    self.entry172.get_buffer().set_text(r[1])
+                elif QRType.get_type(result) == QRType.EMAIL_MESSAGE:
+                    r = parse(ST_EMAIL_MSG, result)
+                    self.entry181.set_text(r[0])
+                    self.entry182.set_text(r[1])
+                    self.entry183.get_buffer().set_text(r[2])
+                elif QRType.get_type(result) == QRType.VCARD:
+                    r = parse(ST_VCARD, result)
+                    self.entries_vcard['01'].set_text(r[0])
+                    self.entries_vcard['02'].set_text(r[1])
+                    self.entries_vcard['03'].set_text(r[2])
+                    self.entries_vcard['04'].set_text(r[3])
+                    self.entries_vcard['05'].set_text(r[4])
+                    self.entries_vcard['06'].set_text(r[5])
+                    self.entries_vcard['07'].set_text(r[6])
+                    self.entries_vcard['08'].set_text(r[7])
+                    self.entries_vcard['09'].set_text(r[8])
+                    self.entries_vcard['10'].set_text(r[9])
+                    self.entries_vcard['11'].set_text(r[10])
+                    self.entries_vcard['12'].set_text(r[11])
+                    self.entries_vcard['13'].set_text(r[12])
+                    self.entries_vcard['14'].set_text(r[13])
+                    self.entries_vcard['15'].set_text(r[14])
+
                 select_value_in_combo(self.control['encoder'],
                                       QRType.get_type(result))
 

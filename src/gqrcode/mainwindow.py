@@ -411,11 +411,10 @@ class MainWindow(Gtk.ApplicationWindow):
         self.do_center()
 
     def on_key_release_event(self, widget, event):
-        print((event.keyval))
         if event.keyval == 65451 or event.keyval == 43:
-            self.scale = self.scale*1.1
+            self.scale = self.scale * 1.1
         elif event.keyval == 65453 or event.keyval == 45:
-            self.scale = self.scale*.9
+            self.scale = self.scale * 0.9
         elif event.keyval == 65456 or event.keyval == 48:
             self.scale = 100
         self.draw_code()
@@ -423,7 +422,6 @@ class MainWindow(Gtk.ApplicationWindow):
     def draw_code(self, first=False):
         if first is True:
             rectangle = self.scrolled_code.get_allocation()
-            print(rectangle.width, rectangle.height)
             if rectangle.width == 1 or rectangle.height == 1:
                 width = 400
                 height = 400
@@ -436,7 +434,6 @@ class MainWindow(Gtk.ApplicationWindow):
                 self.scale = scale_h
             else:
                 self.scale = scale_w
-            print(scale_w, scale_h, self.scale)
 
         if self.pbuf is not None:
             w = int(self.pbuf.get_width() * self.scale / 100)
@@ -456,7 +453,7 @@ class MainWindow(Gtk.ApplicationWindow):
         file_model = Gio.Menu()
 
         file_section1_model = Gio.Menu()
-        file_section1_model.append(_('Open'), 'app.open')
+        file_section1_model.append(_('Open QR Image'), 'app.open')
         file_section1 = Gio.MenuItem.new_section(None, file_section1_model)
         file_model.append_item(file_section1)
 
@@ -467,7 +464,7 @@ class MainWindow(Gtk.ApplicationWindow):
         file_model.append_item(file_section2)
 
         file_section3_model = Gio.Menu()
-        file_section3_model.append(_('Save'), 'app.save')
+        file_section3_model.append(_('Save QR Image'), 'app.save')
         file_section3 = Gio.MenuItem.new_section(None, file_section3_model)
         file_model.append_item(file_section3)
 
@@ -625,21 +622,17 @@ END:VEVENT
                 return
             self.do_encode(to_encode)
         elif self.main_stack.get_visible_child_name() == 'Code':
-            self.do_decode()
+            self.do_decode(self.image.get_pixbuf())
 
     def do_encode(self, to_encode):
         # self.entry21.set_text(to_encode)
 
         def on_encode_done(result, error):
             if self.main_stack.get_visible_child_name() == 'Data':
-                print(self.main_stack.get_visible_child_name())
-                print('---', 1, '---')
                 if isinstance(result, GdkPixbuf.Pixbuf):
-                    print('---', 2, '---')
                     self.pbuf = result
                     self.draw_code(first=True)
                 elif isinstance(result, GdkPixbuf.PixbufSimpleAnim):
-                    print('---', 3, '---')
                     self.pbuf = result
                     self.draw_code(first=True)
                 else:
@@ -649,16 +642,16 @@ END:VEVENT
                 self.main_stack.set_transition_type(
                     Gtk.StackTransitionType.UNDER_LEFT)
                 self.control['run'].get_child().set_from_gicon(
-                        Gio.ThemedIcon(name='go-previous-symbolic'),
-                        Gtk.IconSize.BUTTON)
+                    Gio.ThemedIcon(name='go-previous-symbolic'),
+                    Gtk.IconSize.BUTTON)
 
             elif self.main_stack.get_visible_child_name() == 'Code':
                 self.main_stack.set_visible_child_name('Data')
                 self.main_stack.set_transition_type(
                     Gtk.StackTransitionType.UNDER_RIGHT)
                 self.control['run'].get_child().set_from_gicon(
-                        Gio.ThemedIcon(name='go-next-symbolic'),
-                        Gtk.IconSize.BUTTON)
+                    Gio.ThemedIcon(name='go-next-symbolic'),
+                    Gtk.IconSize.BUTTON)
 
             self.main_stack.get_visible_child().show_all()
             self.get_window().set_cursor(None)
@@ -752,10 +745,10 @@ END:VEVENT
             if os.path.exists(filename):
                 pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename,
                                                                 400, 400)
-                self.image22.set_from_pixbuf(pixbuf)
+                self.image.set_from_pixbuf(pixbuf)
                 self.qrcode_file = filename
+                self.do_decode(filename)
         fcd.destroy()
-        self.do_decode()
 
     def update_preview_cb(self, file_chooser, preview):
         filename = file_chooser.get_preview_filename()
@@ -763,7 +756,8 @@ END:VEVENT
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
             preview.set_from_pixbuf(pixbuf)
             have_preview = True
-        except:
+        except Exception as e:
+            print(e)
             have_preview = False
         file_chooser.set_preview_widget_active(have_preview)
         return
@@ -818,10 +812,9 @@ END:VEVENT
         self.entry182.set_text('')
         self.entry183.get_buffer().set_text('')
 
-    def do_decode(self):
+    def do_decode(self, to_decode):
 
         def on_decode_done(result, error):
-            print(1, '----', result, QRType.get_type(result).name)
             self.clean()
             if result is not None:
                 if QRType.get_type(result) == QRType.TEXT:
@@ -855,7 +848,6 @@ END:VEVENT
                     self.entry183.get_buffer().set_text(r[2])
                 elif QRType.get_type(result) == QRType.VCARD:
                     r = parse(ST_VCARD, result)
-                    print('----', r)
                     self.entries_vcard['01'].set_text(r[0])
                     self.entries_vcard['02'].set_text(r[1])
                     self.entries_vcard['03'].set_text(r[2])
@@ -879,35 +871,40 @@ END:VEVENT
                 self.main_stack.set_transition_type(
                     Gtk.StackTransitionType.UNDER_RIGHT)
                 self.control['run'].get_child().set_from_gicon(
-                        Gio.ThemedIcon(name='go-next-symbolic'),
-                        Gtk.IconSize.BUTTON)
+                    Gio.ThemedIcon(name='go-next-symbolic'),
+                    Gtk.IconSize.BUTTON)
                 self.main_stack.get_visible_child().show_all()
 
         @async_function(on_done=on_decode_done)
-        def do_decode_in_thread(pixbuf):
-            if pixbuf is not None:
-                mtempfile = tempfile.NamedTemporaryFile(mode='w+b',
-                                                        prefix='gqrcode',
-                                                        delete=True).name
-                pixbuf.savev(mtempfile, 'png', [], [])
-                command = 'zbarimg %s' % (mtempfile)
+        def do_decode_in_thread(to_decode):
+            if to_decode is not None:
+                if type(to_decode) == str and os.path.exists(to_decode):
+                    command = 'zbarimg %s' % (to_decode)
+                elif type(to_decode) == GdkPixbuf.Pixbuf:
+                    mtempfile = tempfile.NamedTemporaryFile(mode='w+b',
+                                                            prefix='gqrcode',
+                                                            delete=True).name
+                    to_decode.savev(mtempfile, 'png', [], [])
+                    command = 'zbarimg %s' % (mtempfile)
+                else:
+                    return None
                 salida = ejecuta(command)
                 try:
                     utf8Data = salida.decode()
                     salida = utf8Data.split('QR-Code:')[1]
                 except UnicodeDecodeError as e:
-                    print(e)
+                    print('UnicodeDecodeError', e)
                     utf8Data = salida.decode("utf-8").encode("sjis")
                     salida = utf8Data.decode("utf-8").split('QR-Code:')[1]
                 if salida.endswith('\n'):
                     salida = salida[:-1]
-            return salida
-        do_decode_in_thread(self.pbuf)
+                return salida
+        do_decode_in_thread(to_decode)
 
     def save_encoded(self):
-        animation = self.image21.get_animation()
+        animation = self.image.get_animation()
         if animation is None:
-            pixbuf = self.image21.get_pixbuf()
+            pixbuf = self.image.get_pixbuf()
             if pixbuf is not None:
                 fcd = Gtk.FileChooserDialog(
                     _('Set file to save encode image'),

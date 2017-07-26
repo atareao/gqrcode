@@ -19,7 +19,7 @@ msgstr ""
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:92
 msgid "Geolocation"
-msgstr ""
+msgstr "Geolocalización"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:112
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:145
@@ -29,89 +29,89 @@ msgstr ""
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:297
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:312
 msgid "Encode"
-msgstr "Codificar"
+msgstr "Cifrar"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:128
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:130
 msgid "Set text to encode: "
-msgstr "Introduce el texto a codificar:"
+msgstr "Introduce el texto a descifrar:"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:157
 msgid "Telephone number"
-msgstr ""
+msgstr "Número de teléfono"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:159
 #, fuzzy
 msgid "Set number to encode:"
-msgstr "Introduce el texto a codificar:"
+msgstr "Introduce el texto a descifrar:"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:186
 msgid "Email"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:188
 msgid "Set email:"
-msgstr ""
+msgstr "Introduce el correo electrónico:"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:215
 msgid "Url"
-msgstr ""
+msgstr "Url"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:217
 msgid "Set url:"
-msgstr ""
+msgstr "Introduce url:"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:244
 msgid "Wifi Login"
-msgstr ""
+msgstr "Contraseña WiFi"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:246
 msgid "SSID/Network name:"
-msgstr ""
+msgstr "Nombre de la red/SSID"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:261
 msgid "Password:"
-msgstr ""
+msgstr "Contraseña:"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:277
 msgid "Network type:"
-msgstr ""
+msgstr "Tipo de red:"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:284
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:285
 msgid "WPA/WPA2"
-msgstr ""
+msgstr "WPA/WPA2"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:286
 msgid "No encryption"
-msgstr ""
+msgstr "Sin cifrar"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:321
 #, fuzzy
 msgid "Encoded text:"
-msgstr "Codificar"
+msgstr "Texto cifrado:"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:342
 msgid "Decode"
-msgstr "Descodificar"
+msgstr "Descifrar"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:351
 msgid "Decoded"
-msgstr "Descodificado"
+msgstr "Descifrado"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:378
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:383
 msgid "load file"
-msgstr ""
+msgstr "cargar archivo"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:391
 msgid "Save as"
@@ -119,43 +119,43 @@ msgstr "Guardar como"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:401
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:416
 msgid "Homepage"
-msgstr ""
+msgstr "Página principal"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:424
 msgid "Get help online..."
-msgstr ""
+msgstr "Consigue ayuna online..."
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:432
 msgid "Translate this application..."
-msgstr ""
+msgstr "Ayuda a traducir esta aplicación..."
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:440
 msgid "Report a bug..."
-msgstr ""
+msgstr "Informa de un error..."
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:452
 msgid "Follow me in Twitter"
-msgstr ""
+msgstr "Sígueme en Twitter"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:460
 msgid "Follow me in Google+"
-msgstr ""
+msgstr "Sígueme en Google+"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:469
 msgid "Follow me in Facebook"
-msgstr ""
+msgstr "Sígueme en Facebook"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:476
 msgid "About"
-msgstr ""
+msgstr "Acerca de..."
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:492
 msgid "An application to code and decode"
-msgstr "Una aplicación para codificar y decodificar"
+msgstr "Una aplicación para cifrar y descifrar códigos QR"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:592
 msgid "Set file to load qrcode"
@@ -164,11 +164,11 @@ msgstr "Establecer el archivo para cargar qrcode"
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:598
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:639
 msgid "png files"
-msgstr ""
+msgstr "Imágenes PNG"
 
 #: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:632
 msgid "Set file to save encode image"
-msgstr "Establecer el archivo para guardar la imagen codificada"
+msgstr "Establecer el archivo para guardar la imagen cifrada"
 
 #~ msgid "Load qrcode image"
 #~ msgstr "Cargar la imagen qrcode"

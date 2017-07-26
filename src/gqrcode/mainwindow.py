@@ -855,6 +855,7 @@ END:VEVENT
                     self.entry183.get_buffer().set_text(r[2])
                 elif QRType.get_type(result) == QRType.VCARD:
                     r = parse(ST_VCARD, result)
+                    print('----', r)
                     self.entries_vcard['01'].set_text(r[0])
                     self.entries_vcard['02'].set_text(r[1])
                     self.entries_vcard['03'].set_text(r[2])

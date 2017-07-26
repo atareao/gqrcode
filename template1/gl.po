@@ -5,7 +5,7 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: gqrcode 0.4.1\n"
+"Project-Id-Version: gqrcode 0.5.0\n"
 "Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
 "POT-Creation-Date: 2016-04-10 21:52+0200\n"
 "PO-Revision-Date: 2016-05-30 17:25+0100\n"

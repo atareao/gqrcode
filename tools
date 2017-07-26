@@ -187,8 +187,8 @@ def create_rules(file):
     fl = open(file_txt, 'r')
     for lan in fl.readlines():
         lan = lan[:-1]
-        f.write('\tmkdir -p ${CURDIR}/debian/%s/usr/share/locale-langpack/\
-MESSAGES\n' % (APP, lan))
+        f.write('\tmkdir -p ${CURDIR}/debian/%s/usr/share/\
+locale-langpack/%s/LC_MESSAGES\n' % (APP, lan))
     fl.close()
     f.write('\t# End create languages directories\n')
 

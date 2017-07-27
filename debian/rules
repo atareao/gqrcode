@@ -69,21 +69,21 @@ binary-indep: build install
 	# added gconf and icons
 	dh_gconf
 	dh_icons
-#    dh_installmenu
-#    dh_installdebconf
-#    dh_installlogrotate
-#    dh_installemacsen
-#    dh_installcatalogs
-#    dh_installpam
-#    dh_installmime
-#    dh_installinit
-#    dh_installcron
-#    dh_installinfo
-#    dh_installwm
-#    dh_installudev
-#    dh_lintian
-#    dh_bugfiles
-#    dh_undocumented
+#	dh_installmenu
+#	dh_installdebconf
+#	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installcatalogs
+#	dh_installpam
+#	dh_installmime
+#	dh_installinit
+#	dh_installcron
+#	dh_installinfo
+#	dh_installwm
+#	dh_installudev
+#	dh_lintian
+#	dh_bugfiles
+#	dh_undocumented
 	dh_installman
 	dh_link
 	dh_compress

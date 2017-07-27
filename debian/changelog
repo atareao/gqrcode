@@ -1,3 +1,10 @@
+gqrcode (0.5.1-0extras17.04.0) zesty; urgency=medium
+
+  * Updated translations
+  * Updated tools
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 27 Jul 2017 11:40:20 +0200
+
 gqrcode (0.5.0-0extras17.04.5) zesty; urgency=medium
 
   * parse

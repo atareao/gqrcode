@@ -2,12 +2,12 @@
 # Copyright (C) 2011 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Lorenzo <EMAIL@ADDRESS>, 2011.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gqrcode 0.5.0\n"
 "Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
-"POT-Creation-Date: 2016-04-10 21:52+0200\n"
+"POT-Creation-Date: 2017-07-27 11:34+0200\n"
 "PO-Revision-Date: 2016-05-30 17:25+0100\n"
 "Last-Translator: Manuel X. Lemos <mxlemos@openmailbox.org>\n"
 "Language-Team: Galician\n"
@@ -17,156 +17,311 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:92
-msgid "Geolocation"
-msgstr "Xeolocalización"
-
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:112
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:145
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:174
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:203
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:232
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:297
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:312
-msgid "Encode"
-msgstr "Codificar"
-
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:128
-msgid "Text"
-msgstr "Texto"
-
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:130
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:197
 msgid "Set text to encode: "
 msgstr "Texto para codificar:"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:157
-msgid "Telephone number"
-msgstr "Teléfono"
-
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:159
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:237
 msgid "Set number to encode:"
 msgstr "Número para codificar:"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:186
-msgid "Email"
-msgstr "Correo-e"
-
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:188
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:249
 msgid "Set email:"
 msgstr "Correo-e para codificar:"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:215
-msgid "Url"
-msgstr "Web"
-
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:217
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:261
 msgid "Set url:"
 msgstr "Enderezo web:"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:244
-msgid "Wifi Login"
-msgstr "WiFi"
-
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:246
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:273
 msgid "SSID/Network name:"
 msgstr "SSID/Nome de rede:"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:261
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:282
 msgid "Password:"
 msgstr "Contrasinal:"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:277
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:292
 msgid "Network type:"
 msgstr "Tipo de rede:"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:284
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:296
 msgid "WEP"
 msgstr "WEP"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:285
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:297
 msgid "WPA/WPA2"
 msgstr "WPA/WPA2"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:286
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:298
 msgid "No encryption"
 msgstr "Aberta"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:321
-msgid "Encoded text:"
-msgstr "Texto codificado:"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:311
+#, fuzzy
+msgid "Telephone Number:"
+msgstr "Teléfono"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:342
-msgid "Decode"
-msgstr "Decodificar"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:320
+msgid "SMS Message:"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:351
-msgid "Decoded"
-msgstr "Decodificado"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:338
+#, fuzzy
+msgid "Email:"
+msgstr "Correo-e"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:378
-msgid "File"
-msgstr "Ficheiro"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:347
+msgid "Subject:"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:383
-msgid "load file"
-msgstr "Cargar ficheiro"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:356
+msgid "Body:"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:391
-msgid "Save as"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:374
+msgid "Fist name"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:375
+msgid "Last name"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:376
+msgid "Job title"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:377
+#, fuzzy
+msgid "Telephone Number (work)"
+msgstr "Teléfono"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:378
+msgid "Fax Number (work)"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:379
+msgid "Cell Phone"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:380
+msgid "Email Address (work)"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:381
+msgid "Website Address"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:382
+msgid "Organization"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:383
+msgid "Street Address (work)"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:384
+msgid "City"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:385
+msgid "State"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:386
+msgid "Zip/Postcode"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:387
+msgid "Country"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:388
+msgid "Notes"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:456
+msgid "Open QR Image"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:461
+msgid "Load background"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:462
+msgid "Reset background"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:467
+#, fuzzy
+msgid "Save QR Image"
 msgstr "Gardar como"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:401
-msgid "Help"
-msgstr "Axuda"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:472
+msgid "Close"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:416
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:483
+msgid "Text"
+msgstr "Texto"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:484
+msgid "Geolocation"
+msgstr "Xeolocalización"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:485
+msgid "Telephone number"
+msgstr "Teléfono"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:486
+msgid "Email"
+msgstr "Correo-e"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:487
+msgid "Url"
+msgstr "Web"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:488
+msgid "Wifi Login"
+msgstr "WiFi"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:489
+msgid "SMS"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:490
+msgid "Email message"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:491
+msgid "vCard"
+msgstr ""
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:503
+msgid "Encode"
+msgstr "Codificar"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:512
 msgid "Homepage"
 msgstr "Páxina web"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:424
-msgid "Get help online..."
-msgstr "Axuda en liña..."
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:517
+msgid "Code"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:432
-msgid "Translate this application..."
-msgstr "Traduce este aplicativo..."
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:518
+msgid "Issues"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:440
-msgid "Report a bug..."
-msgstr "Informa dun erro..."
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:523
+msgid "Twitter"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:452
-msgid "Follow me in Twitter"
-msgstr "Ségueme en Twitter"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:524
+msgid "Facebook"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:460
-msgid "Follow me in Google+"
-msgstr "Ségueme en Google+"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:525
+msgid "Google+"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:469
-msgid "Follow me in Facebook"
-msgstr "Ségueme en Facebook"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:530
+#, fuzzy
+msgid "Donations"
+msgstr "Xeolocalización"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:476
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:535
 msgid "About"
 msgstr "Sobre"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:492
-msgid "An application to code and decode"
-msgstr "Unha aplicación para codificar e decodificar"
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:666
+msgid "Creating QR Code"
+msgstr ""
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:592
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:699
+msgid "File"
+msgstr "Ficheiro"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:704
+msgid "load file"
+msgstr "Cargar ficheiro"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:712
+msgid "Save as"
+msgstr "Gardar como"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:728
 msgid "Set file to load qrcode"
 msgstr "conxunto de arquivos para cargar o QRCode"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:598
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:639
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:734
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:779
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:917
 msgid "png files"
 msgstr "ficheiros png"
 
-#: /home/lorenzo/CloudStation/Programacion/Python/current/gqrcode/src/gqrcode.py:632
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:768
+#, fuzzy
+msgid "Set file for QR background"
+msgstr "conxunto de arquivos para cargar o QRCode"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:773
+#, fuzzy
+msgid "Image files"
+msgstr "ficheiros png"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:783
+#, fuzzy
+msgid "jpeg files"
+msgstr "ficheiros png"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:787
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:937
+#, fuzzy
+msgid "gif files"
+msgstr "ficheiros png"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:910
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:930
 msgid "Set file to save encode image"
 msgstr "conxunto de arquivos para gardar a imaxe codificar"
+
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/gqrcode.py:217
+msgid "QRCode coder and decoder"
+msgstr ""
+
+#~ msgid "Encoded text:"
+#~ msgstr "Texto codificado:"
+
+#~ msgid "Decode"
+#~ msgstr "Decodificar"
+
+#~ msgid "Decoded"
+#~ msgstr "Decodificado"
+
+#~ msgid "Help"
+#~ msgstr "Axuda"
+
+#~ msgid "Get help online..."
+#~ msgstr "Axuda en liña..."
+
+#~ msgid "Translate this application..."
+#~ msgstr "Traduce este aplicativo..."
+
+#~ msgid "Report a bug..."
+#~ msgstr "Informa dun erro..."
+
+#~ msgid "Follow me in Twitter"
+#~ msgstr "Ségueme en Twitter"
+
+#~ msgid "Follow me in Google+"
+#~ msgstr "Ségueme en Google+"
+
+#~ msgid "Follow me in Facebook"
+#~ msgstr "Ségueme en Facebook"
+
+#~ msgid "An application to code and decode"
+#~ msgstr "Unha aplicación para codificar e decodificar"
 
 #~ msgid "Load qrcode image"
 #~ msgstr "imaxe qrcode Carga"

@@ -88,8 +88,8 @@ binary-indep: build install
 	dh_link
 	dh_compress
 	dh_fixperms
-#    dh_perl
-	dh_pysupport
+#	dh_perl
+#	dh_pysupport
 	dh_installdeb
 	dh_gencontrol
 	dh_md5sums

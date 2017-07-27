@@ -1,9 +1,9 @@
-gqrcode (0.5.0-0extras17.04.4) zesty; urgency=medium
+gqrcode (0.5.0-0extras17.04.5) zesty; urgency=medium
 
   * parse
   * removed dh_python
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Wed, 26 Jul 2017 18:24:15 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 27 Jul 2017 10:14:58 +0200
 
 gqrcode (0.4.1-0extras17.04.3) zesty; urgency=medium
 

@@ -821,48 +821,55 @@ END:VEVENT
                     self.entry12.set_text(result)
                 elif QRType.get_type(result) == QRType.GEOLOCATION:
                     r = parse(ST_GEO, result)
-                    self.viewer.set_center_and_zoom(float(r[0]),
-                                                    float(r[1]),
-                                                    14)
+                    if r is not None and len(r) > 0:
+                        self.viewer.set_center_and_zoom(float(r[0]),
+                                                        float(r[1]),
+                                                        14)
                 elif QRType.get_type(result) == QRType.TELEPHONE_NUMBER:
                     r = parse(ST_TEL, result)
-                    self.entry13.set_text(r[0])
+                    if r is not None and len(r) > 0:
+                        self.entry13.set_text(r[0])
                 elif QRType.get_type(result) == QRType.EMAIL:
                     r = parse(ST_MAIL, result)
-                    self.entry14.set_text(r[0])
+                    if r is not None and len(r) > 0:
+                        self.entry14.set_text(r[0])
                 elif QRType.get_type(result) == QRType.URL:
                     self.entry15.set_text(result)
                 elif QRType.get_type(result) == QRType.WIFI_LOGIN:
                     r = parse(ST_WIFI, result)
-                    self.entry161.set_text(r[1])
-                    self.entry162.set_text(r[2])
+                    if r is not None and len(r) > 0:
+                        self.entry161.set_text(r[1])
+                        self.entry162.set_text(r[2])
                     select_value_in_combo(self.combobox163, r[0])
                 elif QRType.get_type(result) == QRType.SMS:
                     r.parse(ST_SMS, result)
-                    self.entry171.set_text(r[0])
-                    self.entry172.get_buffer().set_text(r[1])
+                    if r is not None and len(r) > 0:
+                        self.entry171.set_text(r[0])
+                        self.entry172.get_buffer().set_text(r[1])
                 elif QRType.get_type(result) == QRType.EMAIL_MESSAGE:
                     r = parse(ST_EMAIL_MSG, result)
-                    self.entry181.set_text(r[0])
-                    self.entry182.set_text(r[1])
-                    self.entry183.get_buffer().set_text(r[2])
+                    if r is not None and len(r) > 0:
+                        self.entry181.set_text(r[0])
+                        self.entry182.set_text(r[1])
+                        self.entry183.get_buffer().set_text(r[2])
                 elif QRType.get_type(result) == QRType.VCARD:
                     r = parse(ST_VCARD, result)
-                    self.entries_vcard['01'].set_text(r[0])
-                    self.entries_vcard['02'].set_text(r[1])
-                    self.entries_vcard['03'].set_text(r[2])
-                    self.entries_vcard['04'].set_text(r[3])
-                    self.entries_vcard['05'].set_text(r[4])
-                    self.entries_vcard['06'].set_text(r[5])
-                    self.entries_vcard['07'].set_text(r[6])
-                    self.entries_vcard['08'].set_text(r[7])
-                    self.entries_vcard['09'].set_text(r[8])
-                    self.entries_vcard['10'].set_text(r[9])
-                    self.entries_vcard['11'].set_text(r[10])
-                    self.entries_vcard['12'].set_text(r[11])
-                    self.entries_vcard['13'].set_text(r[12])
-                    self.entries_vcard['14'].set_text(r[13])
-                    self.entries_vcard['15'].set_text(r[14])
+                    if r is not None and len(r) > 0:
+                        self.entries_vcard['01'].set_text(r[0])
+                        self.entries_vcard['02'].set_text(r[1])
+                        self.entries_vcard['03'].set_text(r[2])
+                        self.entries_vcard['04'].set_text(r[3])
+                        self.entries_vcard['05'].set_text(r[4])
+                        self.entries_vcard['06'].set_text(r[5])
+                        self.entries_vcard['07'].set_text(r[6])
+                        self.entries_vcard['08'].set_text(r[7])
+                        self.entries_vcard['09'].set_text(r[8])
+                        self.entries_vcard['10'].set_text(r[9])
+                        self.entries_vcard['11'].set_text(r[10])
+                        self.entries_vcard['12'].set_text(r[11])
+                        self.entries_vcard['13'].set_text(r[12])
+                        self.entries_vcard['14'].set_text(r[13])
+                        self.entries_vcard['15'].set_text(r[14])
 
                 select_value_in_combo(self.control['encoder'],
                                       QRType.get_type(result))

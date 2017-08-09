@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gqrcode 0.5.0\n"
+"Project-Id-Version: gqrcode 0.5.2\n"
 "Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
-"POT-Creation-Date: 2017-07-27 11:34+0200\n"
+"POT-Creation-Date: 2017-08-09 13:14+0200\n"
 "PO-Revision-Date: 2016-05-30 17:25+0100\n"
 "Last-Translator: Manuel X. Lemos <mxlemos@openmailbox.org>\n"
 "Language-Team: Galician\n"
@@ -256,7 +256,7 @@ msgstr "conxunto de arquivos para cargar o QRCode"
 
 #: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:734
 #: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:779
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:917
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:924
 msgid "png files"
 msgstr "ficheiros png"
 
@@ -276,13 +276,13 @@ msgid "jpeg files"
 msgstr "ficheiros png"
 
 #: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:787
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:937
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:944
 #, fuzzy
 msgid "gif files"
 msgstr "ficheiros png"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:910
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:930
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:917
+#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:937
 msgid "Set file to save encode image"
 msgstr "conxunto de arquivos para gardar a imaxe codificar"
 

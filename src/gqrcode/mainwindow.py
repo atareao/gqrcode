@@ -821,40 +821,40 @@ END:VEVENT
                     self.entry12.set_text(result)
                 elif QRType.get_type(result) == QRType.GEOLOCATION:
                     r = parse(ST_GEO, result)
-                    if r is not None and len(r) > 0:
+                    if r is not None:
                         self.viewer.set_center_and_zoom(float(r[0]),
                                                         float(r[1]),
                                                         14)
                 elif QRType.get_type(result) == QRType.TELEPHONE_NUMBER:
                     r = parse(ST_TEL, result)
-                    if r is not None and len(r) > 0:
+                    if r is not None:
                         self.entry13.set_text(r[0])
                 elif QRType.get_type(result) == QRType.EMAIL:
                     r = parse(ST_MAIL, result)
-                    if r is not None and len(r) > 0:
+                    if r is not None:
                         self.entry14.set_text(r[0])
                 elif QRType.get_type(result) == QRType.URL:
                     self.entry15.set_text(result)
                 elif QRType.get_type(result) == QRType.WIFI_LOGIN:
                     r = parse(ST_WIFI, result)
-                    if r is not None and len(r) > 0:
+                    if r is not None:
                         self.entry161.set_text(r[1])
                         self.entry162.set_text(r[2])
                     select_value_in_combo(self.combobox163, r[0])
                 elif QRType.get_type(result) == QRType.SMS:
-                    r.parse(ST_SMS, result)
-                    if r is not None and len(r) > 0:
+                    r = parse(ST_SMS, result)
+                    if r is not None:
                         self.entry171.set_text(r[0])
                         self.entry172.get_buffer().set_text(r[1])
                 elif QRType.get_type(result) == QRType.EMAIL_MESSAGE:
                     r = parse(ST_EMAIL_MSG, result)
-                    if r is not None and len(r) > 0:
+                    if r is not None:
                         self.entry181.set_text(r[0])
                         self.entry182.set_text(r[1])
                         self.entry183.get_buffer().set_text(r[2])
                 elif QRType.get_type(result) == QRType.VCARD:
                     r = parse(ST_VCARD, result)
-                    if r is not None and len(r) > 0:
+                    if r is not None:
                         self.entries_vcard['01'].set_text(r[0])
                         self.entries_vcard['02'].set_text(r[1])
                         self.entries_vcard['03'].set_text(r[2])

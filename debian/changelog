@@ -1,3 +1,10 @@
+gqrcode (0.5.3-0extras19.10.01) eoan; urgency=medium
+
+  * Clea
+  * Fix ip location
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 26 Oct 2019 11:09:59 +0200
+
 gqrcode (0.5.2-0extras17.04.1) zesty; urgency=medium
 
   * None found

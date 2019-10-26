@@ -1,13 +1,13 @@
-# Spanish translations for PACKAGE package.
+# Spanish translations for gqrcode package.
 # Copyright (C) 2011 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the gqrcode package.
 # Lorenzo <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gqrcode 0.5.2\n"
-"Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
-"POT-Creation-Date: 2017-08-09 13:14+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-26 11:09+0200\n"
 "PO-Revision-Date: 2011-03-27 10:06+0200\n"
 "Last-Translator: Lorenzo Carbonell<lorenzo.carbonell.cerezo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -17,276 +17,273 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:197
+#: src/gqrcode/mainwindow.py:197
 msgid "Set text to encode: "
 msgstr "Introduce el texto a cifrar:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:237
+#: src/gqrcode/mainwindow.py:237
 #, fuzzy
 msgid "Set number to encode:"
 msgstr "Introduce el número a cifrar:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:249
+#: src/gqrcode/mainwindow.py:249
 msgid "Set email:"
 msgstr "Introduce el correo electrónico:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:261
+#: src/gqrcode/mainwindow.py:261
 msgid "Set url:"
 msgstr "Introduce url:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:273
+#: src/gqrcode/mainwindow.py:273
 msgid "SSID/Network name:"
 msgstr "Nombre de la red/SSID"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:282
+#: src/gqrcode/mainwindow.py:282
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:292
+#: src/gqrcode/mainwindow.py:292
 msgid "Network type:"
 msgstr "Tipo de red:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:296
+#: src/gqrcode/mainwindow.py:296
 msgid "WEP"
 msgstr "WEP"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:297
+#: src/gqrcode/mainwindow.py:297
 msgid "WPA/WPA2"
 msgstr "WPA/WPA2"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:298
+#: src/gqrcode/mainwindow.py:298
 msgid "No encryption"
 msgstr "Sin cifrar"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:311
+#: src/gqrcode/mainwindow.py:311
 #, fuzzy
 msgid "Telephone Number:"
 msgstr "Número de teléfono"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:320
+#: src/gqrcode/mainwindow.py:320
 msgid "SMS Message:"
 msgstr "Mensaje SMS:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:338
+#: src/gqrcode/mainwindow.py:338
 #, fuzzy
 msgid "Email:"
 msgstr "Correo electrónico"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:347
+#: src/gqrcode/mainwindow.py:347
 msgid "Subject:"
 msgstr "Asunto:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:356
+#: src/gqrcode/mainwindow.py:356
 msgid "Body:"
 msgstr "Cuerpo:"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:374
+#: src/gqrcode/mainwindow.py:374
 msgid "Fist name"
 msgstr "Nombre"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:375
+#: src/gqrcode/mainwindow.py:375
 msgid "Last name"
 msgstr "Apellido"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:376
+#: src/gqrcode/mainwindow.py:376
 msgid "Job title"
 msgstr "Puesto de trabajo"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:377
+#: src/gqrcode/mainwindow.py:377
 #, fuzzy
 msgid "Telephone Number (work)"
 msgstr "Número de teléfono (trabajo)"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:378
+#: src/gqrcode/mainwindow.py:378
 msgid "Fax Number (work)"
 msgstr "Número de fax (trabajo)"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:379
+#: src/gqrcode/mainwindow.py:379
 msgid "Cell Phone"
 msgstr "Número de móvil"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:380
+#: src/gqrcode/mainwindow.py:380
 msgid "Email Address (work)"
 msgstr "Correo electrónico (trabajo)"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:381
+#: src/gqrcode/mainwindow.py:381
 msgid "Website Address"
 msgstr "Página web"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:382
+#: src/gqrcode/mainwindow.py:382
 msgid "Organization"
 msgstr "Organización"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:383
+#: src/gqrcode/mainwindow.py:383
 msgid "Street Address (work)"
 msgstr "Dirección (trabajo)"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:384
+#: src/gqrcode/mainwindow.py:384
 msgid "City"
 msgstr "Ciudad"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:385
+#: src/gqrcode/mainwindow.py:385
 msgid "State"
 msgstr "Estado"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:386
+#: src/gqrcode/mainwindow.py:386
 msgid "Zip/Postcode"
 msgstr "Código postal"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:387
+#: src/gqrcode/mainwindow.py:387
 msgid "Country"
 msgstr "País"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:388
+#: src/gqrcode/mainwindow.py:388
 msgid "Notes"
 msgstr "Notas"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:456
+#: src/gqrcode/mainwindow.py:456
 msgid "Open QR Image"
 msgstr "Abrir imagen QR"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:461
+#: src/gqrcode/mainwindow.py:461
 msgid "Load background"
 msgstr "Cargar fondo"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:462
+#: src/gqrcode/mainwindow.py:462
 msgid "Reset background"
 msgstr "Quitar fondo"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:467
+#: src/gqrcode/mainwindow.py:467
 #, fuzzy
 msgid "Save QR Image"
 msgstr "Guardar imagen QR"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:472
+#: src/gqrcode/mainwindow.py:472
 msgid "Close"
 msgstr "Cerrar"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:483
+#: src/gqrcode/mainwindow.py:483
 msgid "Text"
 msgstr "Texto"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:484
+#: src/gqrcode/mainwindow.py:484
 msgid "Geolocation"
 msgstr "Geolocalización"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:485
+#: src/gqrcode/mainwindow.py:485
 msgid "Telephone number"
 msgstr "Número de teléfono"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:486
+#: src/gqrcode/mainwindow.py:486
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:487
+#: src/gqrcode/mainwindow.py:487
 msgid "Url"
 msgstr "Url"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:488
+#: src/gqrcode/mainwindow.py:488
 msgid "Wifi Login"
 msgstr "Contraseña WiFi"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:489
+#: src/gqrcode/mainwindow.py:489
 msgid "SMS"
 msgstr "SMS"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:490
+#: src/gqrcode/mainwindow.py:490
 msgid "Email message"
 msgstr "Mensaje vía correo electrónico"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:491
+#: src/gqrcode/mainwindow.py:491
 msgid "vCard"
 msgstr "Tarjeta electrónica"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:503
+#: src/gqrcode/mainwindow.py:503
 msgid "Encode"
 msgstr "Cifrar"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:512
+#: src/gqrcode/mainwindow.py:512
 msgid "Homepage"
 msgstr "Página principal"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:517
+#: src/gqrcode/mainwindow.py:517
 msgid "Code"
 msgstr "Código"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:518
+#: src/gqrcode/mainwindow.py:518
 msgid "Issues"
 msgstr "Errores"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:523
+#: src/gqrcode/mainwindow.py:523
 msgid "Twitter"
 msgstr "Twitter"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:524
+#: src/gqrcode/mainwindow.py:524
 msgid "Facebook"
 msgstr "Facebook"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:525
+#: src/gqrcode/mainwindow.py:525
 msgid "Google+"
 msgstr "Google+"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:530
+#: src/gqrcode/mainwindow.py:530
 #, fuzzy
 msgid "Donations"
 msgstr "Donaciones"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:535
+#: src/gqrcode/mainwindow.py:535
 msgid "About"
 msgstr "Acerca de..."
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:666
+#: src/gqrcode/mainwindow.py:667
 msgid "Creating QR Code"
 msgstr "Crear código QR"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:699
+#: src/gqrcode/mainwindow.py:697
 msgid "File"
 msgstr "Archivo"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:704
+#: src/gqrcode/mainwindow.py:702
 msgid "load file"
 msgstr "cargar archivo"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:712
+#: src/gqrcode/mainwindow.py:710
 msgid "Save as"
 msgstr "Guardar como"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:728
+#: src/gqrcode/mainwindow.py:726
 msgid "Set file to load qrcode"
 msgstr "Establecer el archivo para cargar qrcode"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:734
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:779
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:924
+#: src/gqrcode/mainwindow.py:732 src/gqrcode/mainwindow.py:767
+#: src/gqrcode/mainwindow.py:914
 msgid "png files"
 msgstr "Imágenes PNG"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:768
+#: src/gqrcode/mainwindow.py:756
 #, fuzzy
 msgid "Set file for QR background"
 msgstr "Establecer el archivo para cargar qrcode"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:773
+#: src/gqrcode/mainwindow.py:761
 #, fuzzy
 msgid "Image files"
 msgstr "Imágenes PNG"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:783
+#: src/gqrcode/mainwindow.py:771
 #, fuzzy
 msgid "jpeg files"
 msgstr "Imágenes PNG"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:787
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:944
+#: src/gqrcode/mainwindow.py:775 src/gqrcode/mainwindow.py:934
 #, fuzzy
 msgid "gif files"
 msgstr "Imágenes GIF"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:917
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/mainwindow.py:937
+#: src/gqrcode/mainwindow.py:907 src/gqrcode/mainwindow.py:927
 msgid "Set file to save encode image"
 msgstr "Establecer el archivo para guardar la imagen cifrada"
 
-#: /datos/Sync/Programacion/Python/gqrcode/src/gqrcode/gqrcode.py:217
+#: src/gqrcode/gqrcode.py:202
 msgid "QRCode coder and decoder"
 msgstr "QRCode cifra y descifra"

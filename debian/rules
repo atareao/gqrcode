@@ -34,28 +34,27 @@ install: build
 	dh_installdirs
 	dh_install
 	# Create languages directories
-	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/eu/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/it/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/de/LC_MESSAGES
 	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/en/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/es/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/eu/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/fr/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/gl/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/it/LC_MESSAGES
 	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/ro/LC_MESSAGES
 	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/tr/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/gl/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/es/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/fr/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/de/LC_MESSAGES
 	# End create languages directories
 	# Compile languages
-	msgfmt template1/eu.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/eu/LC_MESSAGES/gqrcode.mo
-	msgfmt template1/it.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/it/LC_MESSAGES/gqrcode.mo
-	msgfmt template1/en.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/en/LC_MESSAGES/gqrcode.mo
-	msgfmt template1/ro.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/ro/LC_MESSAGES/gqrcode.mo
-	msgfmt template1/tr.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/tr/LC_MESSAGES/gqrcode.mo
-	msgfmt template1/gl.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/gl/LC_MESSAGES/gqrcode.mo
-	msgfmt template1/es.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/es/LC_MESSAGES/gqrcode.mo
-	msgfmt template1/fr.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/fr/LC_MESSAGES/gqrcode.mo
-	msgfmt template1/de.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/de/LC_MESSAGES/gqrcode.mo
+	msgfmt po/de.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/de/LC_MESSAGES/gqrcode.mo
+	msgfmt po/en.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/en/LC_MESSAGES/gqrcode.mo
+	msgfmt po/es.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/es/LC_MESSAGES/gqrcode.mo
+	msgfmt po/eu.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/eu/LC_MESSAGES/gqrcode.mo
+	msgfmt po/fr.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/fr/LC_MESSAGES/gqrcode.mo
+	msgfmt po/gl.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/gl/LC_MESSAGES/gqrcode.mo
+	msgfmt po/it.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/it/LC_MESSAGES/gqrcode.mo
+	msgfmt po/ro.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/ro/LC_MESSAGES/gqrcode.mo
+	msgfmt po/tr.po -o ${CURDIR}/debian/gqrcode/usr/share/locale-langpack/tr/LC_MESSAGES/gqrcode.mo
 	# End comile languages
-
 	# Add here commands to install the package into debian/<packagename>.
 	#$(MAKE) prefix=`pwd`/debian/`dh_listpackages`/usr install
 

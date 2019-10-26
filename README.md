@@ -14,6 +14,19 @@ Create your own QR Codes for everything you want
 
 ### 🏠 [Homepage](https://www.atareao.es/aplicacion/crear-codigos-qr-en-ubuntu/)
 
+### Dependencies
+
+If you install this app from PPA Repository, don't worry about depenencies.
+
+* python3,
+* python3-gi,
+* python3-pil,
+* python3-requests,
+* gir1.2-gtk-3.0,
+* gir1.2-gdkpixbuf-2.0,
+* gir1.2-osmgpsmap-1.0,
+* zbar-tools
+
 ## Install
 
 ```sh

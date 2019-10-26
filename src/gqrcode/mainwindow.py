@@ -1,27 +1,28 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
+# This file is part of GQRCode
 #
-# <one line to give the program's name and a brief idea of what it does.>
-#
-# Copyright (C) 2010-2016 Lorenzo Carbonell
-# lorenzo.carbonell.cerezo@gmail.com
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
-#
+# Copyright (c) 2012-2019 Lorenzo Carbonell Cerezo <a.k.a. atareao>
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 import gi
 try:
     gi.require_version('Gtk', '3.0')
@@ -44,10 +45,10 @@ import subprocess
 import tempfile
 from . import comun
 from .myqr import create_qr
-from .geolocation import get_external_ip, get_latitude_longitude
+from .util import get_latitude_longitude, update_preview_cb
 # from .mylibs.draw import pixbuf2image
 # import qreader
-from .async import async_function
+from .dasync import async_function
 from .progreso import Progreso
 from .parse import parse
 from .comun import _
@@ -622,6 +623,7 @@ END:VEVENT
                 return
             self.do_encode(to_encode)
         elif self.main_stack.get_visible_child_name() == 'Code':
+            print(23)
             self.do_decode(self.image.get_pixbuf())
 
     def do_encode(self, to_encode):
@@ -681,11 +683,8 @@ END:VEVENT
 
         @async_function(on_done=on_center_done)
         def do_center_in_thread():
-            ip = get_external_ip()
-            if ip is not None:
-                ans = get_latitude_longitude(ip)
-                return ans
-            return None
+            return get_latitude_longitude()
+
         do_center_in_thread()
 
     def init_menu(self, vbox):
@@ -738,7 +737,7 @@ END:VEVENT
         fcd.set_current_folder(os.getenv('HOME'))
         preview = Gtk.Image()
         fcd.set_preview_widget(preview)
-        fcd.connect('update-preview', self.update_preview_cb, preview)
+        fcd.connect('update-preview', update_preview_cb, preview)
         res = fcd.run()
         if res == Gtk.ResponseType.ACCEPT:
             filename = fcd.get_filename()
@@ -750,17 +749,7 @@ END:VEVENT
                 self.do_decode(filename)
         fcd.destroy()
 
-    def update_preview_cb(self, file_chooser, preview):
-        filename = file_chooser.get_preview_filename()
-        try:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
-            preview.set_from_pixbuf(pixbuf)
-            have_preview = True
-        except Exception as e:
-            print(e)
-            have_preview = False
-        file_chooser.set_preview_widget_active(have_preview)
-        return
+
 
     def load_background(self):
         self.background = None
@@ -790,7 +779,7 @@ END:VEVENT
         fcd.set_current_folder(os.getenv('HOME'))
         preview = Gtk.Image()
         fcd.set_preview_widget(preview)
-        fcd.connect('update-preview', self.update_preview_cb, preview)
+        fcd.connect('update-preview', update_preview_cb, preview)
         res = fcd.run()
         if res == Gtk.ResponseType.ACCEPT:
             filename = fcd.get_filename()
@@ -874,6 +863,7 @@ END:VEVENT
                 select_value_in_combo(self.control['encoder'],
                                       QRType.get_type(result))
 
+                print(24)
                 self.main_stack.set_visible_child_name('Data')
                 self.main_stack.set_transition_type(
                     Gtk.StackTransitionType.UNDER_RIGHT)
@@ -881,6 +871,7 @@ END:VEVENT
                     Gio.ThemedIcon(name='go-next-symbolic'),
                     Gtk.IconSize.BUTTON)
                 self.main_stack.get_visible_child().show_all()
+                print(25)
 
         @async_function(on_done=on_decode_done)
         def do_decode_in_thread(to_decode):

@@ -1,4 +1,4 @@
- Welcome to GQRCode 👋
+ # Welcome to GQRCode 👋
 
 ![Version](https://img.shields.io/badge/version-0.5.3-blue.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://www.atareao.es/aplicacion/crear-codigos-qr-en-ubuntu/)
@@ -11,29 +11,50 @@ Create your own QR Codes for everything you want
 
 > gqrcode is a very simple application that can create QR codes. This codes can have background, and can be animated QR codes. There are posibilities to create codes for simple text, geolocations, telephone number, email, url, WiFi Login, SMS, email messages and vCards...
 
-
-### 🏠 [Homepage](https://www.atareao.es/aplicacion/crear-codigos-qr-en-ubuntu/)
-
-### Dependencies
-
-If you install this app from PPA Repository, don't worry about depenencies.
-
-* python3,
-* python3-gi,
-* python3-pil,
-* python3-requests,
-* gir1.2-gtk-3.0,
-* gir1.2-gdkpixbuf-2.0,
-* gir1.2-osmgpsmap-1.0,
-* zbar-tools
+## 🏠 [Homepage](https://www.atareao.es/aplicacion/crear-codigos-qr-en-ubuntu/)
 
 ## Install
+
+This applicaciont isn't in the Software Center of Ubuntu, but you can install it from personal repository. Open a terminal and run this commands.
 
 ```sh
 sudo add-apt-repository ppa:atareao/atareao
 sudo apt-get update
 sudo apt-get install gqrcode
 ```
+
+### Required dependecies
+
+If you install this application from PPA Repository don't worry about install dependencies
+
+```
+python3,
+python3-gi,
+python3-pil,
+python3-requests,
+gir1.2-gtk-3.0,
+gir1.2-gdkpixbuf-2.0,
+gir1.2-osmgpsmap-1.0,
+zbar-tools
+```
+
+### Run this app
+
+![Geolocation](images/geolocation.png)
+
+![Email](images/email.png)
+
+![SMS](images/sms.png)
+
+![Text](images/text.png)
+
+![VCard](images/vcard.png)
+
+![Wifi Passwords](images/wifi.png)
+
+And the final result
+
+![QR Code](images/qrcode.png)
 
 ## Author
 

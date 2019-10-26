@@ -573,45 +573,44 @@ ALLOWED_TYPES = set(list('nbox%fegwWdDsS') +
     ['t' + c for c in 'ieahgcts'])
 
 
-def extract_format(format, extra_types):
+def extract_format(aformat, extra_types):
     '''Pull apart the format [[fill]align][0][width][.precision][type]
     '''
     fill = align = None
-    if format[0] in '<>=^':
-        align = format[0]
-        format = format[1:]
-    elif len(format) > 1 and format[1] in '<>=^':
-        fill = format[0]
-        align = format[1]
-        format = format[2:]
+    if aformat[0] in '<>=^':
+        align = aformat[0]
+        aformat = aformat[1:]
+    elif len(aformat) > 1 and aformat[1] in '<>=^':
+        fill = aformat[0]
+        align = aformat[1]
+        aformat = aformat[2:]
 
     zero = False
-    if format and format[0] == '0':
+    if aformat and aformat[0] == '0':
         zero = True
-        format = format[1:]
+        aformat = aformat[1:]
 
     width = ''
-    while format:
-        if not format[0].isdigit():
+    while aformat:
+        if not aformat[0].isdigit():
             break
-        width += format[0]
-        format = format[1:]
+        width += aformat[0]
+        aformat = aformat[1:]
 
-    if format.startswith('.'):
+    if aformat.startswith('.'):
         # Precision isn't needed but we need to capture it so that
         # the ValueError isn't raised.
-        format = format[1:]  # drop the '.'
+        aformat = aformat[1:]  # drop the '.'
         precision = ''
-        while format:
-            if not format[0].isdigit():
+        while aformat:
+            if not aformat[0].isdigit():
                 break
-            precision += format[0]
-            format = format[1:]
+            precision += aformat[0]
+            aformat = aformat[1:]
 
     # the rest is the type, if present
-    type = format
-    if type and type not in ALLOWED_TYPES and type not in extra_types:
-        raise ValueError('format spec %r not recognised' % type)
+    if aformat and aformat not in ALLOWED_TYPES and aformat not in extra_types:
+        raise ValueError('format spec %r not recognised' % aformat)
 
     return locals()
 
@@ -622,7 +621,7 @@ PARSE_RE = re.compile(r"""({{|}}|{\w*(?:(?:\.\w+)|(?:\[[^\]]+\]))*(?::[^}]+)?})"
 class Parser(object):
     '''Encapsulate a format string that may be used to parse other strings.
     '''
-    def __init__(self, format, extra_types={}):
+    def __init__(self, aformat, extra_types={}):
         # a mapping of a name as in {hello.world} to a regex-group compatible
         # name, like hello__world Its used to prevent the transformation of
         # name-to-group and group to name to fail subtly, such as in:
@@ -635,7 +634,7 @@ class Parser(object):
         # field type specification for the named field
         self._name_types = {}
 
-        self._format = format
+        self._format = aformat
         self._extra_types = extra_types
         self._fixed_fields = []
         self._named_fields = []
@@ -645,7 +644,7 @@ class Parser(object):
         self.__search_re = None
         self.__match_re = None
 
-        log.debug('format %r -> %r' % (format, self._expression))
+        log.debug('format %r -> %r' % (aformat, self._expression))
 
     def __repr__(self):
         if len(self._format) > 20:
@@ -836,23 +835,23 @@ class Parser(object):
 
         # now figure whether this is an anonymous or named field, and whether
         # there's any format specification
-        format = ''
+        aformat = ''
         if field and field[0].isalpha():
             if ':' in field:
-                name, format = field.split(':')
+                name, aformat = field.split(':')
             else:
                 name = field
             if name in self._name_to_group_map:
-                if self._name_types[name] != format:
+                if self._name_types[name] != aformat:
                     raise RepeatedNameError('field type %r for field "%s" '
-                        'does not match previous seen type %r' % (format,
+                        'does not match previous seen type %r' % (aformat,
                         name, self._name_types[name]))
                 group = self._name_to_group_map[name]
                 # match previously-seen value
                 return '(?P=%s)' % group
             else:
                 group = self._to_group_name(name)
-                self._name_types[name] = format
+                self._name_types[name] = aformat
             self._named_fields.append(group)
             # this will become a group, which must not contain dots
             wrap = '(?P<%s>%%s)' % group
@@ -860,19 +859,19 @@ class Parser(object):
             self._fixed_fields.append(self._group_index)
             wrap = '(%s)'
             if ':' in field:
-                format = field[1:]
+                aformat = field[1:]
             group = self._group_index
 
         # simplest case: no type specifier ({} or {name})
-        if not format:
+        if not aformat:
             self._group_index += 1
             return wrap % '.+?'
 
         # decode the format specification
-        format = extract_format(format, self._extra_types)
+        aformat = extract_format(aformat, self._extra_types)
 
         # figure type conversions, if any
-        type = format['type']
+        type = aformat['type']
         is_numeric = type and type in 'n%fegdobh'
         if type in self._extra_types:
             type_converter = self._extra_types[type]
@@ -976,8 +975,8 @@ class Parser(object):
         else:
             s = '.+?'
 
-        align = format['align']
-        fill = format['fill']
+        align = aformat['align']
+        fill = aformat['fill']
 
         # handle some numeric-specific things like fill and sign
         if is_numeric:
@@ -988,7 +987,7 @@ class Parser(object):
                 if not fill:
                     fill = '0'
                 s = '%s*' % fill + s
-            elif format['zero']:
+            elif aformat['zero']:
                 s = '0*' + s
 
             # allow numbers to be prefixed with a sign
@@ -1003,7 +1002,7 @@ class Parser(object):
             s = wrap % s
             self._group_index += 1
 
-        if format['width']:
+        if aformat['width']:
             # all we really care about is that if the format originally
             # specified a width then there will probably be padding - without
             # an explicit alignment that'll mean right alignment with spaces
@@ -1091,7 +1090,7 @@ class ResultIterator(object):
     next = __next__
 
 
-def parse(format, string, extra_types={}, evaluate_result=True):
+def parse(aformat, string, extra_types={}, evaluate_result=True):
     '''Using "format" attempt to pull values from "string".
 
     The format must match the string contents exactly. If the value
@@ -1114,10 +1113,10 @@ def parse(format, string, extra_types={}, evaluate_result=True):
 
     In the case there is no match parse() will return None.
     '''
-    return Parser(format, extra_types=extra_types).parse(string, evaluate_result=evaluate_result)
+    return Parser(aformat, extra_types=extra_types).parse(string, evaluate_result=evaluate_result)
 
 
-def search(format, string, pos=0, endpos=None, extra_types={}, evaluate_result=True):
+def search(aformat, string, pos=0, endpos=None, extra_types={}, evaluate_result=True):
     '''Search "string" for the first occurance of "format".
 
     The format may occur anywhere within the string. If
@@ -1143,10 +1142,10 @@ def search(format, string, pos=0, endpos=None, extra_types={}, evaluate_result=T
 
     In the case there is no match parse() will return None.
     '''
-    return Parser(format, extra_types=extra_types).search(string, pos, endpos, evaluate_result=evaluate_result)
+    return Parser(aformat, extra_types=extra_types).search(string, pos, endpos, evaluate_result=evaluate_result)
 
 
-def findall(format, string, pos=0, endpos=None, extra_types={}, evaluate_result=True):
+def findall(aformat, string, pos=0, endpos=None, extra_types={}, evaluate_result=True):
     '''Search "string" for the all occurrances of "format".
 
     You will be returned an iterator that holds Result instances
@@ -1165,14 +1164,14 @@ def findall(format, string, pos=0, endpos=None, extra_types={}, evaluate_result=
      .evaluate_result() - This will return a Result instance like you would get
                           with ``evaluate_result`` set to True
 
-    If the format is invalid a ValueError will be raised.
+    If the aformat is invalid a ValueError will be raised.
 
     See the module documentation for the use of "extra_types".
     '''
-    return Parser(format, extra_types=extra_types).findall(string, pos, endpos, evaluate_result=evaluate_result)
+    return Parser(aformat, extra_types=extra_types).findall(string, pos, endpos, evaluate_result=evaluate_result)
 
 
-def compile(format, extra_types={}):
+def compile(aformat, extra_types={}):
     '''Create a Parser instance to parse "format".
 
     The resultant Parser has a method .parse(string) which
@@ -1185,7 +1184,7 @@ def compile(format, extra_types={}):
 
     Returns a Parser instance.
     '''
-    return Parser(format, extra_types=extra_types)
+    return Parser(aformat, extra_types=extra_types)
 
 
 # Copyright (c) 2012-2013 Richard Jones <richard@python.org>

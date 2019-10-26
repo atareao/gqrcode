@@ -696,8 +696,7 @@ class Parser(object):
 
         if evaluate_result:
             return self.evaluate_result(m)
-        else:
-            return Match(self, m)
+        return Match(self, m)
 
     def search(self, string, pos=0, endpos=None, evaluate_result=True):
         '''Search the string for my format.
@@ -719,8 +718,7 @@ class Parser(object):
 
         if evaluate_result:
             return self.evaluate_result(m)
-        else:
-            return Match(self, m)
+        return Match(self, m)
 
     def findall(self, string, pos=0, endpos=None, extra_types={}, evaluate_result=True):
         '''Search "string" for the all occurrances of "format".
@@ -871,70 +869,70 @@ class Parser(object):
         aformat = extract_format(aformat, self._extra_types)
 
         # figure type conversions, if any
-        type = aformat['type']
-        is_numeric = type and type in 'n%fegdobh'
-        if type in self._extra_types:
-            type_converter = self._extra_types[type]
+        atype = aformat['type']
+        is_numeric = atype and atype in 'n%fegdobh'
+        if atype in self._extra_types:
+            type_converter = self._extra_types[atype]
             s = getattr(type_converter, 'pattern', r'.+?')
 
             def f(string, m):
                 return type_converter(string)
             self._type_conversions[group] = f
-        elif type == 'n':
+        elif atype == 'n':
             s = '\d{1,3}([,.]\d{3})*'
             self._group_index += 1
             self._type_conversions[group] = int_convert(10)
-        elif type == 'b':
+        elif atype == 'b':
             s = '(0[bB])?[01]+'
             self._type_conversions[group] = int_convert(2)
             self._group_index += 1
-        elif type == 'o':
+        elif atype == 'o':
             s = '(0[oO])?[0-7]+'
             self._type_conversions[group] = int_convert(8)
             self._group_index += 1
-        elif type == 'x':
+        elif atype == 'x':
             s = '(0[xX])?[0-9a-fA-F]+'
             self._type_conversions[group] = int_convert(16)
             self._group_index += 1
-        elif type == '%':
+        elif atype == '%':
             s = r'\d+(\.\d+)?%'
             self._group_index += 1
             self._type_conversions[group] = percentage
-        elif type == 'f':
+        elif atype == 'f':
             s = r'\d+\.\d+'
             self._type_conversions[group] = lambda s, m: float(s)
-        elif type == 'e':
+        elif atype == 'e':
             s = r'\d+\.\d+[eE][-+]?\d+|nan|NAN|[-+]?inf|[-+]?INF'
             self._type_conversions[group] = lambda s, m: float(s)
-        elif type == 'g':
+        elif atype == 'g':
             s = r'\d+(\.\d+)?([eE][-+]?\d+)?|nan|NAN|[-+]?inf|[-+]?INF'
             self._group_index += 2
             self._type_conversions[group] = lambda s, m: float(s)
-        elif type == 'd':
+        elif atype == 'd':
             s = r'\d+|0[xX][0-9a-fA-F]+|\d+|0[bB][01]+|0[oO][0-7]+'
             self._type_conversions[group] = int_convert(10)
-        elif type == 'ti':
+        elif atype == 'ti':
             s = r'(\d{4}-\d\d-\d\d)((\s+|T)%s)?(Z|\s*[-+]\d\d:?\d\d)?' % \
                 TIME_PAT
             n = self._group_index
             self._type_conversions[group] = partial(date_convert, ymd=n + 1,
                 hms=n + 4, tz=n + 7)
             self._group_index += 7
-        elif type == 'tg':
+        elif atype == 'tg':
             s = r'(\d{1,2}[-/](\d{1,2}|%s)[-/]\d{4})(\s+%s)?%s?%s?' % (
                 ALL_MONTHS_PAT, TIME_PAT, AM_PAT, TZ_PAT)
             n = self._group_index
             self._type_conversions[group] = partial(date_convert, dmy=n + 1,
                 hms=n + 5, am=n + 8, tz=n + 9)
             self._group_index += 9
-        elif type == 'ta':
+        elif atype == 'ta':
             s = r'((\d{1,2}|%s)[-/]\d{1,2}[-/]\d{4})(\s+%s)?%s?%s?' % (
                 ALL_MONTHS_PAT, TIME_PAT, AM_PAT, TZ_PAT)
             n = self._group_index
             self._type_conversions[group] = partial(date_convert, mdy=n + 1,
                 hms=n + 5, am=n + 8, tz=n + 9)
             self._group_index += 9
-        elif type == 'te':
+        elif atype == 'te':
             # this will allow microseconds through if they're present, but meh
             s = r'(%s,\s+)?(\d{1,2}\s+%s\s+\d{4})\s+%s%s' % (DAYS_PAT,
                 MONTHS_PAT, TIME_PAT, TZ_PAT)
@@ -942,7 +940,7 @@ class Parser(object):
             self._type_conversions[group] = partial(date_convert, dmy=n + 3,
                 hms=n + 5, tz=n + 8)
             self._group_index += 8
-        elif type == 'th':
+        elif atype == 'th':
             # slight flexibility here from the stock Apache format
             s = r'(\d{1,2}[-/]%s[-/]\d{4}):%s%s' % (MONTHS_PAT, TIME_PAT,
                 TZ_PAT)
@@ -950,28 +948,28 @@ class Parser(object):
             self._type_conversions[group] = partial(date_convert, dmy=n + 1,
                 hms=n + 3, tz=n + 6)
             self._group_index += 6
-        elif type == 'tc':
+        elif atype == 'tc':
             s = r'(%s)\s+%s\s+(\d{1,2})\s+%s\s+(\d{4})' % (
                 DAYS_PAT, MONTHS_PAT, TIME_PAT)
             n = self._group_index
             self._type_conversions[group] = partial(date_convert,
                 d_m_y=(n + 4, n + 3, n + 8), hms=n + 5)
             self._group_index += 8
-        elif type == 'tt':
+        elif atype == 'tt':
             s = r'%s?%s?%s?' % (TIME_PAT, AM_PAT, TZ_PAT)
             n = self._group_index
             self._type_conversions[group] = partial(date_convert, hms=n + 1,
                 am=n + 4, tz=n + 5)
             self._group_index += 5
-        elif type == 'ts':
+        elif atype == 'ts':
             s = r'%s(\s+)(\d+)(\s+)(\d{1,2}:\d{1,2}:\d{1,2})?' % (MONTHS_PAT)
             n = self._group_index
             self._type_conversions[group] = partial(date_convert, mm=n+1, dd=n+3,
                 hms=n + 5)
             self._group_index += 5
 
-        elif type:
-            s = r'\%s+' % type
+        elif atype:
+            s = r'\%s+' % atype
         else:
             s = '.+?'
 
@@ -1083,8 +1081,7 @@ class ResultIterator(object):
 
         if self.evaluate_result:
             return self.parser.evaluate_result(m)
-        else:
-            return Match(self.parser, m)
+        return Match(self.parser, m)
 
     # pre-py3k compat
     next = __next__

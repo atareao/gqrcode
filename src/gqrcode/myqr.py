@@ -95,6 +95,30 @@ def get_gif_rate(filename):
     return float(frames)/sum(durations)
 
 
+def combine_pilimage(ver, qr, filename, colorized, contrast, brightness):
+    width, height = qr.size
+    layer0 = Image.new('RGBA', qr.size, (0, 0, 0, 0))
+    print(filename, type(filename))
+    print(Image, type(Image))
+    if isinstance(filename, GdkPixbuf.Pixbuf):
+        layer1 = pixbuf2image(filename)
+    elif isinstance(filename, Image.Image):
+        layer1 = filename.convert('RGBA')
+    else:
+        layer1 = Image.open(filename)
+        layer1 = layer1.convert('RGBA')
+    layer1 = ImageEnhance.Contrast(layer1).enhance(contrast)
+    layer1 = ImageEnhance.Brightness(layer1).enhance(brightness)
+    layer1 = layer1.resize((int(width * 0.8), int(height * 0.8)),
+                            Image.BICUBIC)
+    layer0.paste(layer1, (int(width * 0.1), int(height * 0.1)))
+    background = Image.blend(
+        layer0, Image.new('RGBA', qr.size, (255, 255, 255, 255)), 0.3)
+    background = Image.alpha_composite(background, convert_w2t(qr))
+
+    return background
+
+
 def create_qr(words, version=1, level='H', picture=None, colorized=False,
               contrast=1.0, brightness=1.0, progreso=None):
     print('----', picture, '----')
@@ -124,36 +148,10 @@ qrstuvwxyz ··,.:;+-*/\~!@#$%^&`'=<>[]()?_{}|"
             raise ValueError('Wrong contrast! Input a float-type value!')
         if not isinstance(brightness, float):
             raise ValueError('Wrong brightness! Input a float-type value!')
-
-    def combine_pilimage(ver, qr, filename, colorized, contrast, brightness):
-        width, height = qr.size
-        layer0 = Image.new('RGBA', qr.size, (0, 0, 0, 0))
-        print(filename, type(filename))
-        print(Image, type(Image))
-        if isinstance(filename, GdkPixbuf.Pixbuf):
-            layer1 = pixbuf2image(filename)
-        elif isinstance(filename, Image.Image):
-            layer1 = filename.convert('RGBA')
-        else:
-            layer1 = Image.open(filename)
-            layer1 = layer1.convert('RGBA')
-        layer1 = ImageEnhance.Contrast(layer1).enhance(contrast)
-        layer1 = ImageEnhance.Brightness(layer1).enhance(brightness)
-        layer1 = layer1.resize((int(width * 0.8), int(height * 0.8)),
-                               Image.BICUBIC)
-        layer0.paste(layer1, (int(width * 0.1), int(height * 0.1)))
-        background = Image.blend(
-            layer0, Image.new('RGBA', qr.size, (255, 255, 255, 255)), 0.3)
-        background = Image.alpha_composite(background, convert_w2t(qr))
-
-        return background
-
     try:
         ver, pilimage = theqrmodule.get_qrcode_pilimage(version, level, words)
-        qr_width, qr_height = pilimage.size
         if picture and picture[-4:] == '.gif':
             rate = get_gif_rate(picture)
-            print(rate)
             if rate is None:
                 if progreso is not None:
                     GLib.idle_add(progreso.set_max_value, 1)
@@ -163,27 +161,26 @@ qrstuvwxyz ··,.:;+-*/\~!@#$%^&`'=<>[]()?_{}|"
                     GLib.idle_add(progreso.increase)
                     GLib.idle_add(progreso.close)
                 return image2pixbuf(qr), None
-            else:
-                frames = get_frames(picture)
-                width, height = Image.open(picture).size
-                simpleanim = GdkPixbuf.PixbufSimpleAnim.new(width,
-                                                            height,
-                                                            rate)
-                image_frames = []
+            frames = get_frames(picture)
+            width, height = Image.open(picture).size
+            simpleanim = GdkPixbuf.PixbufSimpleAnim.new(width,
+                                                        height,
+                                                        rate)
+            image_frames = []
+            if progreso is not None:
+                GLib.idle_add(progreso.set_max_value, len(frames))
+            for index, frame in enumerate(frames):
+                print('Adding frame number: {0}'.format(index))
+                image_frame = combine_pilimage(ver, pilimage, frame,
+                                                colorized, contrast,
+                                                brightness)
+                image_frames.append(image_frame)
+                simpleanim.add_frame(image2pixbuf(image_frame))
                 if progreso is not None:
-                    GLib.idle_add(progreso.set_max_value, len(frames))
-                for index, frame in enumerate(frames):
-                    print('Adding frame number: {0}'.format(index))
-                    image_frame = combine_pilimage(ver, pilimage, frame,
-                                                   colorized, contrast,
-                                                   brightness)
-                    image_frames.append(image_frame)
-                    simpleanim.add_frame(image2pixbuf(image_frame))
-                    if progreso is not None:
-                        GLib.idle_add(progreso.increase)
-                if progreso is not None:
-                    GLib.idle_add(progreso.close)
-                return simpleanim, image_frames
+                    GLib.idle_add(progreso.increase)
+            if progreso is not None:
+                GLib.idle_add(progreso.close)
+            return simpleanim, image_frames
         elif picture:
             if progreso is not None:
                 GLib.idle_add(progreso.set_max_value, 1)

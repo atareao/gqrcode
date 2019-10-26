@@ -1,11 +1,10 @@
  Welcome to GQRCode 👋
 
-![Version](https://img.shields.io/badge/version-0.9.1-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-0.5.3-blue.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://www.atareao.es/aplicacion/crear-codigos-qr-en-ubuntu/)
 [![Twitter: atareao](https://img.shields.io/twitter/follow/atareao.svg?style=social)](https://twitter.com/atareao)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0b82a753282f4e59bfc1ac03bf4ad120)](https://www.codacy.com/manual/atareao/gqrcode?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=atareao/gqrcode&amp;utm_campaign=Badge_Grade)
-
 [![CodeFactor](https://www.codefactor.io/repository/github/atareao/gqrcode/badge)](https://www.codefactor.io/repository/github/atareao/gqrcode)
 
 Create your own QR Codes for everything you want

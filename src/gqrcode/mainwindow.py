@@ -90,7 +90,7 @@ def set_margins(widget, margin):
     widget.set_margin_right(margin)
     widget.set_margin_top(margin)
     widget.set_margin_bottom(margin)
-    if type(widget) == Gtk.Grid:
+    if isinstance(widget, Gtk.Grid):
         widget.set_column_spacing(10)
         widget.set_row_spacing(10)
 
@@ -137,25 +137,24 @@ class QRType(Enum):
     def get_type(decoded_string):
         if decoded_string.lower().startswith('geo:'):
             return QRType.GEOLOCATION
-        elif decoded_string.lower().startswith('tel:'):
+        if decoded_string.lower().startswith('tel:'):
             return QRType.TELEPHONE_NUMBER
-        elif decoded_string.lower().startswith('mailto:'):
+        if decoded_string.lower().startswith('mailto:'):
             return QRType.EMAIL
-        elif decoded_string.lower().startswith('http://') or\
+        if decoded_string.lower().startswith('http://') or\
                 decoded_string.lower().startswith('https://'):
             return QRType.URL
-        elif decoded_string.lower().startswith('wifi:'):
+        if decoded_string.lower().startswith('wifi:'):
             return QRType.WIFI_LOGIN
-        elif decoded_string.lower().startswith('smsto:'):
+        if decoded_string.lower().startswith('smsto:'):
             return QRType.SMS
-        elif decoded_string.lower().startswith('matmsg:'):
+        if decoded_string.lower().startswith('matmsg:'):
             return QRType.EMAIL_MESSAGE
-        elif decoded_string.lower().startswith('begin:vcard'):
+        if decoded_string.lower().startswith('begin:vcard'):
             return QRType.VCARD
-        elif decoded_string.lower().startswith('begin:vevent'):
+        if decoded_string.lower().startswith('begin:vevent'):
             return QRType.VEVENT
-        else:
-            return QRType.TEXT
+        return QRType.TEXT
 
 
 class MainWindow(Gtk.ApplicationWindow):
@@ -729,11 +728,11 @@ END:VEVENT
             buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
                      Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
 
-        filter = Gtk.FileFilter()
-        filter.set_name(_('png files'))
-        filter.add_mime_type('image/png')
-        filter.add_pattern('*.png')
-        fcd.add_filter(filter)
+        afilter = Gtk.FileFilter()
+        afilter.set_name(_('png files'))
+        afilter.add_mime_type('image/png')
+        afilter.add_pattern('*.png')
+        fcd.add_filter(afilter)
         fcd.set_current_folder(os.getenv('HOME'))
         preview = Gtk.Image()
         fcd.set_preview_widget(preview)
@@ -758,24 +757,24 @@ END:VEVENT
             self, Gtk.FileChooserAction.OPEN,
             buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
                      Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
-        filter = Gtk.FileFilter()
-        filter.set_name(_('Image files'))
-        filter.add_mime_type('image/png')
-        filter.add_mime_type('image/jpeg')
-        filter.add_mime_type('image/gif')
-        fcd.add_filter(filter)
-        filter = Gtk.FileFilter()
-        filter.set_name(_('png files'))
-        filter.add_mime_type('image/png')
-        fcd.add_filter(filter)
-        filter = Gtk.FileFilter()
-        filter.set_name(_('jpeg files'))
-        filter.add_mime_type('image/jpeg')
-        fcd.add_filter(filter)
-        filter = Gtk.FileFilter()
-        filter.set_name(_('gif files'))
-        filter.add_mime_type('image/gif')
-        fcd.add_filter(filter)
+        afilter = Gtk.FileFilter()
+        afilter.set_name(_('Image files'))
+        afilter.add_mime_type('image/png')
+        afilter.add_mime_type('image/jpeg')
+        afilter.add_mime_type('image/gif')
+        fcd.add_filter(afilter)
+        afilter = Gtk.FileFilter()
+        afilter.set_name(_('png files'))
+        afilter.add_mime_type('image/png')
+        fcd.add_filter(afilter)
+        afilter = Gtk.FileFilter()
+        afilter.set_name(_('jpeg files'))
+        afilter.add_mime_type('image/jpeg')
+        fcd.add_filter(afilter)
+        afilter = Gtk.FileFilter()
+        afilter.set_name(_('gif files'))
+        afilter.add_mime_type('image/gif')
+        fcd.add_filter(afilter)
         fcd.set_current_folder(os.getenv('HOME'))
         preview = Gtk.Image()
         fcd.set_preview_widget(preview)
@@ -876,9 +875,9 @@ END:VEVENT
         @async_function(on_done=on_decode_done)
         def do_decode_in_thread(to_decode):
             if to_decode is not None:
-                if type(to_decode) == str and os.path.exists(to_decode):
+                if isinstance(to_decode, str) and os.path.exists(to_decode):
                     command = 'zbarimg %s' % (to_decode)
-                elif type(to_decode) == GdkPixbuf.Pixbuf:
+                elif isinstance(to_decode, GdkPixbuf.Pixbuf):
                     mtempfile = tempfile.NamedTemporaryFile(mode='w+b',
                                                             prefix='gqrcode',
                                                             delete=True).name
@@ -911,11 +910,11 @@ END:VEVENT
                              Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
                 fcd.set_current_folder(os.getenv('HOME'))
                 fcd.set_default_response(Gtk.ResponseType.OK)
-                filter = Gtk.FileFilter()
-                filter.set_name(_('png files'))
-                filter.add_mime_type('image/png')
-                filter.add_pattern('*.png')
-                fcd.add_filter(filter)
+                afilter = Gtk.FileFilter()
+                afilter.set_name(_('png files'))
+                afilter.add_mime_type('image/png')
+                afilter.add_pattern('*.png')
+                fcd.add_filter(afilter)
                 res = fcd.run()
                 if res == Gtk.ResponseType.ACCEPT:
                     filename = fcd.get_filename()

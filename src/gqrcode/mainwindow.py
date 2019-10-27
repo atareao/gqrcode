@@ -622,7 +622,6 @@ END:VEVENT
                 return
             self.do_encode(to_encode)
         elif self.main_stack.get_visible_child_name() == 'Code':
-            print(23)
             self.do_decode(self.image.get_pixbuf())
 
     def do_encode(self, to_encode):
@@ -669,6 +668,8 @@ END:VEVENT
         p.run()
 
     def on_encoder_changed(self, widget):
+        if self.main_stack.get_visible_child_name() != 'Data':
+            self.main_stack.set_visible_child_name('Data')
         selected = get_selected_value_in_combo(self.control['encoder'])
         self.stack.set_visible_child_name(selected.name)
         self.stack.get_visible_child().show_all()
@@ -862,7 +863,6 @@ END:VEVENT
                 select_value_in_combo(self.control['encoder'],
                                       QRType.get_type(result))
 
-                print(24)
                 self.main_stack.set_visible_child_name('Data')
                 self.main_stack.set_transition_type(
                     Gtk.StackTransitionType.UNDER_RIGHT)
@@ -870,7 +870,6 @@ END:VEVENT
                     Gio.ThemedIcon(name='go-next-symbolic'),
                     Gtk.IconSize.BUTTON)
                 self.main_stack.get_visible_child().show_all()
-                print(25)
 
         @async_function(on_done=on_decode_done)
         def do_decode_in_thread(to_decode):
